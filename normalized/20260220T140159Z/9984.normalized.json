@@ -1,0 +1,35 @@
+{
+  "train_number": "9984",
+  "last_update": "15:04",
+  "captured_utc": "20260220T140537Z",
+  "origin_station": "Roma Termini",
+  "destination_station": "Milano Centrale",
+  "origin_code": "RMT",
+  "destination_code": "MC_",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": null,
+      "departure_time": "14:10:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Milano Rogoredo",
+      "location_code": "RG_",
+      "rfi_location_code": "1720",
+      "arrival_time": "17:04:00",
+      "departure_time": "17:06:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Milano Centrale",
+      "location_code": "MC_",
+      "rfi_location_code": "1728",
+      "arrival_time": "17:15:00",
+      "departure_time": null
+    }
+  ]
+}
