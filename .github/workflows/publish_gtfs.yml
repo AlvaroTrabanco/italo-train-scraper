@@ -1,19 +1,19 @@
-name: Build & Publish Italo GTFS
+name: Build & Publish Italo GTFS + Stop Report
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12 * * * *" # every hour at minute 12 (UTC)
+    - cron: "12 * * * *" # hourly (UTC)
 
 permissions:
   contents: write
 
 concurrency:
-  group: build-publish-gtfs
+  group: italo-gtfs-publish
   cancel-in-progress: true
 
 jobs:
-  build:
+  build_publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,68 +24,56 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install deps (if any)
+      - name: Install Python requirements
         run: |
           python -m pip install --upgrade pip
-          # If your scraper uses requests, ensure it’s available:
-          python - <<'PY'
-          import sys, subprocess
-          try:
-            import requests  # noqa
-          except Exception:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
-          PY
+          pip install -r scraper/requirements.txt
 
-      - name: Compute run vars
+      - name: Compute vars
         id: vars
         run: |
-          echo "RUN_UTC=$(date -u +%Y%m%dT%H%M%SZ)" >> $GITHUB_OUTPUT
+          # Use tomorrow if you want day-after logic:
+          # echo "SERVICE_DATE=$(date -u -d 'tomorrow' +%Y%m%d)" >> $GITHUB_OUTPUT
           echo "SERVICE_DATE=$(date -u +%Y%m%d)" >> $GITHUB_OUTPUT
 
-      - name: Scrape trains from trains.txt
+      - name: Scrape (from trains.txt)
         run: |
-          RUN_UTC="${{ steps.vars.outputs.RUN_UTC }}"
-          OUTDIR="out/$RUN_UTC"
-          mkdir -p "$OUTDIR"
+          mkdir -p out
 
-          # Fetch each train number
-          while IFS= read -r T; do
-            T="$(echo "$T" | tr -d '\r' | xargs)"
-            [ -z "$T" ] && continue
-            echo "Fetching $T"
-            curl -s "https://italoinviaggio.italotreno.com/api/RicercaTrenoService?&TrainNumber=$T" \
-              -H "User-Agent: Mozilla/5.0" \
-              > "$OUTDIR/$T.json"
-            sleep 0.15
-          done < scraper/trains.txt
+          python scraper/italo_scrape.py \
+            --trains-file scraper/trains.txt \
+            --outdir out \
+            --slice-size 999999 \
+            --slice-index 0 \
+            --skip-empty
 
-      - name: Normalize scraped JSON
+          RUN_UTC=$(ls -1 out | sort | tail -n 1)
+          echo "RUN_UTC=$RUN_UTC" >> $GITHUB_ENV
+          echo "Scrape run folder: out/$RUN_UTC"
+
+      - name: Normalize
         run: |
-          RUN_UTC="${{ steps.vars.outputs.RUN_UTC }}"
           OUTDIR="out/$RUN_UTC"
           NORMDIR="normalized/$RUN_UTC"
           mkdir -p "$NORMDIR"
+
           python scraper/normalize_italo.py --input-dir "$OUTDIR" --output-dir "$NORMDIR"
 
-      - name: Build GTFS zip (stable + dated)
+      - name: Build GTFS (stable + dated)
         run: |
-          RUN_UTC="${{ steps.vars.outputs.RUN_UTC }}"
           SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
           NORMDIR="normalized/$RUN_UTC"
 
-          mkdir -p gtfs public/gtfs
+          mkdir -p gtfs public/gtfs public/reports
 
-          # Build a dated zip (for history)
           python scraper/build_gtfs.py \
             --normalized-dir "$NORMDIR" \
             --service-date "$SERVICE_DATE" \
             --out-zip "gtfs/italo_$SERVICE_DATE.zip"
 
-          # Copy to Pages folder with stable name
           cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_latest.zip"
           cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_$SERVICE_DATE.zip"
 
-          # Optional: write a tiny metadata file
           cat > public/gtfs/latest.json <<EOF
           {
             "run_utc": "$RUN_UTC",
@@ -95,7 +83,23 @@ jobs:
           }
           EOF
 
-      - name: Publish to GitHub Pages (gh-pages branch)
+          if [ -f public/index.html ]; then
+            echo "index.html already in public/"
+          elif [ -f index.html ]; then
+            cp index.html public/index.html
+          else
+            echo "No index.html found (expected public/index.html in repo)."
+          fi
+
+      - name: Stop coordinates report (read-only coordinates.csv)
+        run: |
+          python scraper/report_stops.py \
+            --normalized-dir "normalized/$RUN_UTC" \
+            --coordinates "coordinates.csv" \
+            --out-dir "public/reports" \
+            --run-utc "$RUN_UTC"
+
+      - name: Publish to GitHub Pages (gh-pages)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
