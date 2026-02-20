@@ -66,31 +66,32 @@ jobs:
 
       - name: Check 8-day window (auto-stop)
         run: |
-          mkdir -p public/state tmp_ctrl
+          mkdir -p public/state
 
           NOW_EPOCH=$(date -u +%s)
 
-          if [ -f gh-pages/state/collection_started_utc.txt ]; then
-            START_UTC=$(cat gh-pages/state/collection_started_utc.txt | tr -d '\n\r')
-            echo "Collection started UTC: $START_UTC"
+          if [ -f gh-pages/state/collection_started_epoch.txt ]; then
+            START_EPOCH=$(cat gh-pages/state/collection_started_epoch.txt | tr -d '\n\r')
+            echo "Collection started epoch: $START_EPOCH"
           else
-            START_UTC=$(date -u +%Y%m%dT%H%M%SZ)
-            echo "Collection started UTC (new): $START_UTC"
+            START_EPOCH=$NOW_EPOCH
+            echo "Collection started epoch (new): $START_EPOCH"
           fi
 
-          # Persist the start timestamp every run
-          echo "$START_UTC" > public/state/collection_started_utc.txt
+          # Persist the start epoch every run (so it's available next run)
+          echo "$START_EPOCH" > public/state/collection_started_epoch.txt
 
-          START_EPOCH=$(date -u -d "$START_UTC" +%s)
           ELAPSED=$((NOW_EPOCH - START_EPOCH))
           LIMIT=$((8 * 24 * 3600))
 
           if [ "$ELAPSED" -ge "$LIMIT" ]; then
             echo "8-day collection window reached. Skipping scrape/normalize/build."
-            echo "{ \"status\": \"stopped\", \"collection_started_utc\": \"$START_UTC\", \"stopped_utc\": \"$(date -u +%Y%m%dT%H%M%SZ)\" }" > public/state/collection_status.json
+            STOPPED_UTC=$(date -u +%Y%m%dT%H%M%SZ)
+            echo "{ \"status\": \"stopped\", \"collection_started_epoch\": $START_EPOCH, \"stopped_utc\": \"$STOPPED_UTC\" }" > public/state/collection_status.json
             exit 0
           else
-            echo "{ \"status\": \"running\", \"collection_started_utc\": \"$START_UTC\", \"now_utc\": \"$(date -u +%Y%m%dT%H%M%SZ)\", \"elapsed_seconds\": $ELAPSED, \"limit_seconds\": $LIMIT }" > public/state/collection_status.json
+            NOW_UTC=$(date -u +%Y%m%dT%H%M%SZ)
+            echo "{ \"status\": \"running\", \"collection_started_epoch\": $START_EPOCH, \"now_utc\": \"$NOW_UTC\", \"elapsed_seconds\": $ELAPSED, \"limit_seconds\": $LIMIT }" > public/state/collection_status.json
           fi
 
       - name: Scrape (from trains.txt)
