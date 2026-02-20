@@ -1,7 +1,7 @@
 {
   "train_number": "9961",
-  "last_update": "20:05",
-  "captured_utc": "20260220T190700Z",
+  "last_update": "20:48",
+  "captured_utc": "20260220T194908Z",
   "origin_station": "Milano Centrale",
   "destination_station": "Roma Termini",
   "origin_code": "MC_",
@@ -41,6 +41,14 @@
     },
     {
       "stop_sequence": 4,
+      "stop_name": null,
+      "location_code": "RIF",
+      "rfi_location_code": null,
+      "arrival_time": "21:30:00",
+      "departure_time": "21:33:00"
+    },
+    {
+      "stop_sequence": 5,
       "stop_name": "Roma Tiburtina",
       "location_code": "RTB",
       "rfi_location_code": "2385",
@@ -48,7 +56,7 @@
       "departure_time": "23:12:00"
     },
     {
-      "stop_sequence": 5,
+      "stop_sequence": 6,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
