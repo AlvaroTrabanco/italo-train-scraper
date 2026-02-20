@@ -6,8 +6,8 @@
   },
   "Roma Termini": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Trieste C.le": {
     "first_seen_utc": "20260220T165619Z",
@@ -26,8 +26,8 @@
   },
   "Napoli Afragola": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Monfalcone": {
     "first_seen_utc": "20260220T165619Z",
@@ -41,8 +41,8 @@
   },
   "Napoli": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Molfetta": {
     "first_seen_utc": "20260220T165619Z",
@@ -81,8 +81,8 @@
   },
   "Genova Brignole": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Venezia Mestre": {
     "first_seen_utc": "20260220T165619Z",
@@ -96,18 +96,18 @@
   },
   "Firenze Santa Maria Novella": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Bologna centrale": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Milano Rogoredo": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Torino Porta di Susa": {
     "first_seen_utc": "20260220T165619Z",
@@ -121,8 +121,8 @@
   },
   "Milano Centrale": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Foggia": {
     "first_seen_utc": "20260220T165619Z",
@@ -161,8 +161,8 @@
   },
   "Genova Piazza Principe": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Vicenza": {
     "first_seen_utc": "20260220T165619Z",
@@ -171,8 +171,8 @@
   },
   "Verona Porta Nuova": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 9
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 10
   },
   "Torino Porta Nuova": {
     "first_seen_utc": "20260220T165619Z",
@@ -211,17 +211,17 @@
   },
   "Trento": {
     "first_seen_utc": "20260220T172318Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 7
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 8
   },
   "Bolzano": {
     "first_seen_utc": "20260220T172318Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 7
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 8
   },
   "Rovereto": {
     "first_seen_utc": "20260220T172318Z",
-    "last_seen_utc": "20260220T213726Z",
-    "seen_count": 7
+    "last_seen_utc": "20260220T224530Z",
+    "seen_count": 8
   }
 }
