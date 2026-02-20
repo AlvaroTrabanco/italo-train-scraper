@@ -1,5 +1,5 @@
 {
-  "train_number": "9993",
+  "train_number": "9961",
   "last_update": "20:05",
   "captured_utc": "20260220T190700Z",
   "origin_station": "Milano Centrale",
@@ -13,30 +13,46 @@
       "location_code": "MC_",
       "rfi_location_code": "1728",
       "arrival_time": null,
-      "departure_time": "17:45:00"
+      "departure_time": "19:40:00"
     },
     {
       "stop_sequence": 1,
-      "stop_name": "Bologna centrale",
-      "location_code": "BO2",
-      "rfi_location_code": "942",
-      "arrival_time": "18:49:00",
-      "departure_time": "18:52:00"
+      "stop_name": "Milano Rogoredo",
+      "location_code": "RG_",
+      "rfi_location_code": "1720",
+      "arrival_time": "19:48:00",
+      "departure_time": "19:50:00"
     },
     {
       "stop_sequence": 2,
-      "stop_name": "Roma Tiburtina",
-      "location_code": "RTB",
-      "rfi_location_code": "2385",
-      "arrival_time": "20:49:00",
-      "departure_time": "20:52:00"
+      "stop_name": "Mediopadana R.Emilia",
+      "location_code": "AAV",
+      "rfi_location_code": "4054",
+      "arrival_time": "20:26:00",
+      "departure_time": "20:28:00"
     },
     {
       "stop_sequence": 3,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "20:54:00",
+      "departure_time": "20:57:00"
+    },
+    {
+      "stop_sequence": 4,
+      "stop_name": "Roma Tiburtina",
+      "location_code": "RTB",
+      "rfi_location_code": "2385",
+      "arrival_time": "23:09:00",
+      "departure_time": "23:12:00"
+    },
+    {
+      "stop_sequence": 5,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
-      "arrival_time": "21:05:00",
+      "arrival_time": "23:24:00",
       "departure_time": null
     }
   ]
