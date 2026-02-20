@@ -36,16 +36,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
 
-      - name: Run scraper (slice for this hour)
+      - name: Run scraper (from trains.txt)
         shell: bash
         run: |
-          # Use current UTC hour to pick a slice index (wraps automatically)
+          # Rotate slices hourly over the trains.txt list
           SLICE_INDEX=$(date -u +%H)
-          echo "SLICE_INDEX=$SLICE_INDEX"
+          SLICE_SIZE=200
+
           python scraper/italo_scrape.py \
-            --range-start 0 \
-            --range-end 9999 \
-            --slice-size 500 \
+            --trains-file scraper/trains.txt \
+            --slice-size "$SLICE_SIZE" \
             --slice-index "$SLICE_INDEX" \
             --outdir out \
             --timeout 25 \
