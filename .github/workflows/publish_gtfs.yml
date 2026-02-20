@@ -16,8 +16,16 @@ jobs:
   build_publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # Main branch checkout (code)
+      - name: Checkout (main)
         uses: actions/checkout@v4
+
+      # gh-pages checkout (persisted state + published site)
+      - name: Checkout (gh-pages)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,9 +40,58 @@ jobs:
       - name: Compute vars
         id: vars
         run: |
-          # Use tomorrow if you want day-after logic:
-          # echo "SERVICE_DATE=$(date -u -d 'tomorrow' +%Y%m%d)" >> $GITHUB_OUTPUT
-          echo "SERVICE_DATE=$(date -u +%Y%m%d)" >> $GITHUB_OUTPUT
+          # Day-after logic (recommended for your case):
+          echo "SERVICE_DATE=$(date -u -d 'tomorrow' +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "WINDOW_HOURS=192" >> $GITHUB_OUTPUT
+
+      - name: Restore persisted state (inventory + normalized_latest)
+        run: |
+          mkdir -p tmp_prev normalized_latest
+
+          # Restore inventory if present
+          if [ -f gh-pages/reports/stop_inventory.json ]; then
+            cp gh-pages/reports/stop_inventory.json tmp_prev/stop_inventory.json
+            echo "Restored stop_inventory.json"
+          else
+            echo "No previous stop_inventory.json found"
+          fi
+
+          # Restore cumulative normalized_latest if present
+          if [ -d gh-pages/state/normalized_latest ]; then
+            cp -R gh-pages/state/normalized_latest/. normalized_latest/
+            echo "Restored normalized_latest ($(ls -1 normalized_latest | wc -l) files)"
+          else
+            echo "No previous normalized_latest found"
+          fi
+
+      - name: Check 8-day window (auto-stop)
+        run: |
+          mkdir -p public/state tmp_ctrl
+
+          NOW_EPOCH=$(date -u +%s)
+
+          if [ -f gh-pages/state/collection_started_utc.txt ]; then
+            START_UTC=$(cat gh-pages/state/collection_started_utc.txt | tr -d '\n\r')
+            echo "Collection started UTC: $START_UTC"
+          else
+            START_UTC=$(date -u +%Y%m%dT%H%M%SZ)
+            echo "Collection started UTC (new): $START_UTC"
+          fi
+
+          # Persist the start timestamp every run
+          echo "$START_UTC" > public/state/collection_started_utc.txt
+
+          START_EPOCH=$(date -u -d "$START_UTC" +%s)
+          ELAPSED=$((NOW_EPOCH - START_EPOCH))
+          LIMIT=$((8 * 24 * 3600))
+
+          if [ "$ELAPSED" -ge "$LIMIT" ]; then
+            echo "8-day collection window reached. Skipping scrape/normalize/build."
+            echo "{ \"status\": \"stopped\", \"collection_started_utc\": \"$START_UTC\", \"stopped_utc\": \"$(date -u +%Y%m%dT%H%M%SZ)\" }" > public/state/collection_status.json
+            exit 0
+          else
+            echo "{ \"status\": \"running\", \"collection_started_utc\": \"$START_UTC\", \"now_utc\": \"$(date -u +%Y%m%dT%H%M%SZ)\", \"elapsed_seconds\": $ELAPSED, \"limit_seconds\": $LIMIT }" > public/state/collection_status.json
+          fi
 
       - name: Scrape (from trains.txt)
         run: |
@@ -47,39 +104,65 @@ jobs:
             --slice-index 0 \
             --skip-empty
 
-          RUN_UTC=$(ls -1 out | sort | tail -n 1)
+          RUN_UTC=$(find out -maxdepth 1 -type d -name "20*T*Z" -printf "%f\n" | sort | tail -n 1)
+          if [ -z "$RUN_UTC" ]; then
+            echo "Could not detect RUN_UTC folder under out/"
+            ls -la out || true
+            exit 1
+          fi
+
           echo "RUN_UTC=$RUN_UTC" >> $GITHUB_ENV
           echo "Scrape run folder: out/$RUN_UTC"
 
-      - name: Normalize
+      - name: Normalize + merge into cumulative normalized_latest
         run: |
           OUTDIR="out/$RUN_UTC"
           NORMDIR="normalized/$RUN_UTC"
           mkdir -p "$NORMDIR"
+          mkdir -p normalized_latest
 
           python scraper/normalize_italo.py --input-dir "$OUTDIR" --output-dir "$NORMDIR"
 
-      - name: Build GTFS (stable + dated)
+          # Merge this run into cumulative normalized_latest (overwrite per train)
+          cp -f "$NORMDIR"/*.normalized.json normalized_latest/ 2>/dev/null || true
+
+          echo "normalized_latest now has $(ls -1 normalized_latest | wc -l) files"
+
+      - name: Build GTFS (stable + dated) from cumulative normalized_latest
+        env:
+          SERVICE_DATE: ${{ steps.vars.outputs.SERVICE_DATE }}
         run: |
           SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
-          NORMDIR="normalized/$RUN_UTC"
+          NORMDIR="normalized_latest"
 
           mkdir -p gtfs public/gtfs public/reports
+          mkdir -p public/state/normalized_latest
+          touch public/.nojekyll
 
           python scraper/build_gtfs.py \
             --normalized-dir "$NORMDIR" \
             --service-date "$SERVICE_DATE" \
             --out-zip "gtfs/italo_$SERVICE_DATE.zip"
 
+          # Stable + dated copies to Pages
           cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_latest.zip"
           cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_$SERVICE_DATE.zip"
+
+          # Persist cumulative normalized_latest to Pages state
+          cp -f normalized_latest/*.normalized.json public/state/normalized_latest/ 2>/dev/null || true
+
+          NORM_COUNT=$(ls -1 normalized_latest | wc -l)
+          TRIPS_COUNT=$(python3 -c 'import os,zipfile; sd=os.environ["SERVICE_DATE"]; zp=f"gtfs/italo_{sd}.zip"; z=zipfile.ZipFile(zp); lines=z.read("trips.txt").decode("utf-8","replace").splitlines(); print(max(0,len(lines)-1))' )
 
           cat > public/gtfs/latest.json <<EOF
           {
             "run_utc": "$RUN_UTC",
             "service_date": "$SERVICE_DATE",
+            "window_hours": ${{ steps.vars.outputs.WINDOW_HOURS }},
             "latest_zip": "italo_latest.zip",
-            "dated_zip": "italo_$SERVICE_DATE.zip"
+            "dated_zip": "italo_$SERVICE_DATE.zip",
+            "normalized_latest_files": $NORM_COUNT,
+            "gtfs_trips": $TRIPS_COUNT
           }
           EOF
 
@@ -91,13 +174,17 @@ jobs:
             echo "No index.html found (expected public/index.html in repo)."
           fi
 
-      - name: Stop coordinates report (read-only coordinates.csv)
+      - name: Stop coordinates report (cumulative)
         run: |
+          INV_IN="tmp_prev/stop_inventory.json"
           python scraper/report_stops.py \
             --normalized-dir "normalized/$RUN_UTC" \
             --coordinates "coordinates.csv" \
             --out-dir "public/reports" \
-            --run-utc "$RUN_UTC"
+            --run-utc "$RUN_UTC" \
+            $( [ -f "$INV_IN" ] && echo "--inventory-in $INV_IN" ) \
+            --inventory-out "public/reports/stop_inventory.json" \
+            --window-hours "${{ steps.vars.outputs.WINDOW_HOURS }}"
 
       - name: Publish to GitHub Pages (gh-pages)
         uses: peaceiris/actions-gh-pages@v4
