@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Italo GTFS Export</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; max-width: 900px; margin: 32px auto; padding: 0 16px; line-height: 1.4; }
+    h1 { font-size: 22px; margin: 0 0 12px; }
+    p { margin: 10px 0; }
+    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 12px; padding: 16px; margin: 14px 0; }
+    ul { margin: 8px 0 0 18px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 0.95em; }
+    .muted { opacity: 0.8; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill { display: inline-block; padding: 4px 10px; border: 1px solid rgba(127,127,127,.35); border-radius: 999px; }
+  </style>
+</head>
+<body>
+  <h1>Italo GTFS Export</h1>
+  <p class="muted">
+    This page is published from the repo’s <code>gh-pages</code> branch. The workflow regenerates the GTFS and reports on schedule.
+  </p>
+
+  <div class="card">
+    <h2 style="font-size:16px; margin:0 0 8px;">GTFS downloads</h2>
+    <ul>
+      <li><a href="./gtfs/italo_latest.zip">italo_latest.zip</a> <span class="muted">(stable URL)</span></li>
+      <li><a id="datedZipLink" href="./gtfs/">Latest dated zip</a> <span class="muted">(auto-filled)</span></li>
+      <li><a href="./gtfs/latest.json">latest.json</a> <span class="muted">(run metadata)</span></li>
+    </ul>
+    <p class="muted" id="metaLine" style="margin-top:10px;"></p>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:16px; margin:0 0 8px;">Stop coordinates reports</h2>
+    <ul>
+      <li><a href="./reports/stops_report_latest.md">stops_report_latest.md</a></li>
+      <li><a href="./reports/stops_report_latest.csv">stops_report_latest.csv</a></li>
+    </ul>
+    <p class="muted" style="margin-top:10px;">
+      Report statuses: <span class="pill">HAS_COORDINATES</span>
+      <span class="pill">MISSING_COORDINATES</span>
+      <span class="pill">NEW_NOT_IN_COORDINATES</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:16px; margin:0 0 8px;">How to update coordinates</h2>
+    <p class="muted" style="margin:0;">
+      Edit <code>coordinates.csv</code> locally, then <code>git pull</code> / <code>git push</code>.
+      The next run will incorporate new lat/lon values into <code>stops.txt</code>.
+    </p>
+  </div>
+
+  <script>
+    // Fill in the "Latest dated zip" link using gtfs/latest.json if available.
+    fetch("./gtfs/latest.json", { cache: "no-store" })
+      .then(r => r.ok ? r.json() : null)
+      .then(meta => {
+        if (!meta) return;
+        const dated = meta.dated_zip ? "./gtfs/" + meta.dated_zip : "./gtfs/";
+        const el = document.getElementById("datedZipLink");
+        el.href = dated;
+        el.textContent = meta.dated_zip || "Latest dated zip";
+
+        const metaLine = document.getElementById("metaLine");
+        const run = meta.run_utc || "(unknown run)";
+        const svc = meta.service_date || "(unknown service date)";
+        metaLine.textContent = `Latest run: ${run} · Service date: ${svc}`;
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>
