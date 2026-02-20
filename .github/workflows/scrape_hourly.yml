@@ -53,9 +53,19 @@ jobs:
             --skip-empty \
             --sleep 0.15 --jitter 0.20
 
-      - name: Upload artifact (this run)
+      - name: Normalize raw JSON to schedule JSON
+        shell: bash
+        run: |
+          RUN_DIR=$(ls -1 out | tail -n 1)
+          echo "Latest run dir: $RUN_DIR"
+          mkdir -p normalized/$RUN_DIR
+          python scraper/normalize_italo.py --input-dir "out/$RUN_DIR" --output-dir "normalized/$RUN_DIR"
+
+      - name: Upload artifact (raw + normalized)
         uses: actions/upload-artifact@v4
         with:
-          name: italo-json-${{ github.run_id }}-${{ github.run_attempt }}
-          path: out/
+          name: italo-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            out/
+            normalized/
           retention-days: 8

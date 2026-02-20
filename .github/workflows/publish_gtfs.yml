@@ -1,0 +1,104 @@
+name: Build & Publish Italo GTFS
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "12 * * * *" # every hour at minute 12 (UTC)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-publish-gtfs
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps (if any)
+        run: |
+          python -m pip install --upgrade pip
+          # If your scraper uses requests, ensure it’s available:
+          python - <<'PY'
+          import sys, subprocess
+          try:
+            import requests  # noqa
+          except Exception:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
+          PY
+
+      - name: Compute run vars
+        id: vars
+        run: |
+          echo "RUN_UTC=$(date -u +%Y%m%dT%H%M%SZ)" >> $GITHUB_OUTPUT
+          echo "SERVICE_DATE=$(date -u +%Y%m%d)" >> $GITHUB_OUTPUT
+
+      - name: Scrape trains from trains.txt
+        run: |
+          RUN_UTC="${{ steps.vars.outputs.RUN_UTC }}"
+          OUTDIR="out/$RUN_UTC"
+          mkdir -p "$OUTDIR"
+
+          # Fetch each train number
+          while IFS= read -r T; do
+            T="$(echo "$T" | tr -d '\r' | xargs)"
+            [ -z "$T" ] && continue
+            echo "Fetching $T"
+            curl -s "https://italoinviaggio.italotreno.com/api/RicercaTrenoService?&TrainNumber=$T" \
+              -H "User-Agent: Mozilla/5.0" \
+              > "$OUTDIR/$T.json"
+            sleep 0.15
+          done < scraper/trains.txt
+
+      - name: Normalize scraped JSON
+        run: |
+          RUN_UTC="${{ steps.vars.outputs.RUN_UTC }}"
+          OUTDIR="out/$RUN_UTC"
+          NORMDIR="normalized/$RUN_UTC"
+          mkdir -p "$NORMDIR"
+          python scraper/normalize_italo.py --input-dir "$OUTDIR" --output-dir "$NORMDIR"
+
+      - name: Build GTFS zip (stable + dated)
+        run: |
+          RUN_UTC="${{ steps.vars.outputs.RUN_UTC }}"
+          SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
+          NORMDIR="normalized/$RUN_UTC"
+
+          mkdir -p gtfs public/gtfs
+
+          # Build a dated zip (for history)
+          python scraper/build_gtfs.py \
+            --normalized-dir "$NORMDIR" \
+            --service-date "$SERVICE_DATE" \
+            --out-zip "gtfs/italo_$SERVICE_DATE.zip"
+
+          # Copy to Pages folder with stable name
+          cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_latest.zip"
+          cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_$SERVICE_DATE.zip"
+
+          # Optional: write a tiny metadata file
+          cat > public/gtfs/latest.json <<EOF
+          {
+            "run_utc": "$RUN_UTC",
+            "service_date": "$SERVICE_DATE",
+            "latest_zip": "italo_latest.zip",
+            "dated_zip": "italo_$SERVICE_DATE.zip"
+          }
+          EOF
+
+      - name: Publish to GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          keep_files: true
