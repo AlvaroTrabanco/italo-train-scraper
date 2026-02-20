@@ -15,6 +15,8 @@ concurrency:
 jobs:
   build_publish:
     runs-on: ubuntu-latest
+    env:
+      SKIP_RUN: "0"
     steps:
       # Main branch checkout (code)
       - name: Checkout (main)
@@ -40,8 +42,9 @@ jobs:
       - name: Compute vars
         id: vars
         run: |
-          # Day-after logic (recommended for your case):
+          # Service date is always "tomorrow"
           echo "SERVICE_DATE=$(date -u -d 'tomorrow' +%Y%m%d)" >> $GITHUB_OUTPUT
+          # Collection window = 8 days
           echo "WINDOW_HOURS=192" >> $GITHUB_OUTPUT
 
       - name: Restore persisted state (inventory + normalized_latest)
@@ -78,7 +81,7 @@ jobs:
             echo "Collection started epoch (new): $START_EPOCH"
           fi
 
-          # Persist the start epoch every run (so it's available next run)
+          # Persist the start epoch every run
           echo "$START_EPOCH" > public/state/collection_started_epoch.txt
 
           ELAPSED=$((NOW_EPOCH - START_EPOCH))
@@ -88,13 +91,15 @@ jobs:
             echo "8-day collection window reached. Skipping scrape/normalize/build."
             STOPPED_UTC=$(date -u +%Y%m%dT%H%M%SZ)
             echo "{ \"status\": \"stopped\", \"collection_started_epoch\": $START_EPOCH, \"stopped_utc\": \"$STOPPED_UTC\" }" > public/state/collection_status.json
-            exit 0
+            echo "SKIP_RUN=1" >> $GITHUB_ENV
           else
             NOW_UTC=$(date -u +%Y%m%dT%H%M%SZ)
             echo "{ \"status\": \"running\", \"collection_started_epoch\": $START_EPOCH, \"now_utc\": \"$NOW_UTC\", \"elapsed_seconds\": $ELAPSED, \"limit_seconds\": $LIMIT }" > public/state/collection_status.json
+            echo "SKIP_RUN=0" >> $GITHUB_ENV
           fi
 
       - name: Scrape (from trains.txt)
+        if: env.SKIP_RUN != '1'
         run: |
           mkdir -p out
 
@@ -116,6 +121,7 @@ jobs:
           echo "Scrape run folder: out/$RUN_UTC"
 
       - name: Normalize + merge into cumulative normalized_latest
+        if: env.SKIP_RUN != '1'
         run: |
           OUTDIR="out/$RUN_UTC"
           NORMDIR="normalized/$RUN_UTC"
@@ -130,10 +136,12 @@ jobs:
           echo "normalized_latest now has $(ls -1 normalized_latest | wc -l) files"
 
       - name: Build GTFS (stable + dated) from cumulative normalized_latest
+        if: env.SKIP_RUN != '1'
         env:
           SERVICE_DATE: ${{ steps.vars.outputs.SERVICE_DATE }}
         run: |
           SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
+          WINDOW_HOURS="${{ steps.vars.outputs.WINDOW_HOURS }}"
           NORMDIR="normalized_latest"
 
           mkdir -p gtfs public/gtfs public/reports
@@ -159,7 +167,7 @@ jobs:
           {
             "run_utc": "$RUN_UTC",
             "service_date": "$SERVICE_DATE",
-            "window_hours": ${{ steps.vars.outputs.WINDOW_HOURS }},
+            "window_hours": $WINDOW_HOURS,
             "latest_zip": "italo_latest.zip",
             "dated_zip": "italo_$SERVICE_DATE.zip",
             "normalized_latest_files": $NORM_COUNT,
@@ -176,6 +184,7 @@ jobs:
           fi
 
       - name: Stop coordinates report (cumulative)
+        if: env.SKIP_RUN != '1'
         run: |
           INV_IN="tmp_prev/stop_inventory.json"
           python scraper/report_stops.py \
