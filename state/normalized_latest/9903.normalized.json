@@ -1,0 +1,35 @@
+{
+  "train_number": "9903",
+  "last_update": "08:01",
+  "captured_utc": "20260221T070249Z",
+  "origin_station": "Roma Termini",
+  "destination_station": "Napoli",
+  "origin_code": "RMT",
+  "destination_code": "NAC",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": null,
+      "departure_time": "07:20:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Napoli Afragola",
+      "location_code": "NAF",
+      "rfi_location_code": "4020",
+      "arrival_time": "08:24:00",
+      "departure_time": "08:26:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Napoli",
+      "location_code": "NAC",
+      "rfi_location_code": "1888",
+      "arrival_time": "08:48:00",
+      "departure_time": null
+    }
+  ]
+}
