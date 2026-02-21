@@ -1,9 +1,9 @@
 {
-  "run_utc": "20260221T044507Z",
+  "run_utc": "20260221T055411Z",
   "service_date": "20260222",
   "window_hours": 192,
   "latest_zip": "italo_latest.zip",
   "dated_zip": "italo_20260222.zip",
-  "normalized_latest_files": 30,
-  "gtfs_trips": 29
+  "normalized_latest_files": 44,
+  "gtfs_trips": 43
 }

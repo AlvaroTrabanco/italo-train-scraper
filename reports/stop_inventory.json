@@ -1,13 +1,13 @@
 {
   "Benevento": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Roma Termini": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Trieste C.le": {
     "first_seen_utc": "20260220T165619Z",
@@ -21,13 +21,13 @@
   },
   "Ferrara": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Napoli Afragola": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Monfalcone": {
     "first_seen_utc": "20260220T165619Z",
@@ -41,33 +41,33 @@
   },
   "Napoli": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Molfetta": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Mediopadana R.Emilia": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Milano Expo Rho": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 8
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 9
   },
   "Trani": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Peschiera": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 8
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 9
   },
   "Treviso C.le": {
     "first_seen_utc": "20260220T165619Z",
@@ -81,68 +81,68 @@
   },
   "Genova Brignole": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T224530Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Venezia Mestre": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Barletta": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Firenze Santa Maria Novella": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Bologna centrale": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Milano Rogoredo": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Torino Porta di Susa": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Salerno": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Milano Centrale": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Foggia": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Brescia": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Desenzano": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 9
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 10
   },
   "Roma Tiburtina": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Portogruaro": {
     "first_seen_utc": "20260220T165619Z",
@@ -161,38 +161,38 @@
   },
   "Genova Piazza Principe": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T224530Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Vicenza": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 9
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 10
   },
   "Verona Porta Nuova": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 11
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 12
   },
   "Torino Porta Nuova": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Caserta": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Bisceglie": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Padova": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Latisana-Lignano": {
     "first_seen_utc": "20260220T165619Z",
@@ -201,27 +201,82 @@
   },
   "Bari Centrale": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260220T204655Z",
-    "seen_count": 7
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 8
   },
   "Venezia Santa Lucia": {
     "first_seen_utc": "20260220T165619Z",
-    "last_seen_utc": "20260221T044507Z",
-    "seen_count": 10
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 11
   },
   "Trento": {
     "first_seen_utc": "20260220T172318Z",
-    "last_seen_utc": "20260220T224530Z",
-    "seen_count": 8
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 9
   },
   "Bolzano": {
     "first_seen_utc": "20260220T172318Z",
-    "last_seen_utc": "20260220T224530Z",
-    "seen_count": 8
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 9
   },
   "Rovereto": {
     "first_seen_utc": "20260220T172318Z",
-    "last_seen_utc": "20260220T224530Z",
-    "seen_count": 8
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 9
+  },
+  "Lamezia Terme C": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Villa S.Giovanni": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Agropoli Castellabate": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Sapri": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Maratea": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Vibo-Pizzo": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Reggio Calabria": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Rovigo": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Paola": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Rosarno": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
+  },
+  "Vallo d.Lucania": {
+    "first_seen_utc": "20260221T055411Z",
+    "last_seen_utc": "20260221T055411Z",
+    "seen_count": 1
   }
 }

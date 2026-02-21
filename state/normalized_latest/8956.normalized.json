@@ -1,0 +1,75 @@
+{
+  "train_number": "8956",
+  "last_update": "06:55",
+  "captured_utc": "20260221T055739Z",
+  "origin_station": "Napoli",
+  "destination_station": "Brescia",
+  "origin_code": "NAC",
+  "destination_code": "BSC",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Napoli",
+      "location_code": "NAC",
+      "rfi_location_code": "1888",
+      "arrival_time": null,
+      "departure_time": "07:02:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "08:15:00",
+      "departure_time": "08:25:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Firenze Santa Maria Novella",
+      "location_code": "SMN",
+      "rfi_location_code": "1325",
+      "arrival_time": "09:57:00",
+      "departure_time": "10:05:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "10:43:00",
+      "departure_time": "10:46:00"
+    },
+    {
+      "stop_sequence": 4,
+      "stop_name": "Verona Porta Nuova",
+      "location_code": "VPN",
+      "rfi_location_code": "3025",
+      "arrival_time": "11:38:00",
+      "departure_time": "11:49:00"
+    },
+    {
+      "stop_sequence": 5,
+      "stop_name": "Peschiera",
+      "location_code": "PSY",
+      "rfi_location_code": "2099",
+      "arrival_time": "12:05:00",
+      "departure_time": "12:07:00"
+    },
+    {
+      "stop_sequence": 6,
+      "stop_name": "Desenzano",
+      "location_code": "DSG",
+      "rfi_location_code": "1229",
+      "arrival_time": "12:14:00",
+      "departure_time": "12:16:00"
+    },
+    {
+      "stop_sequence": 7,
+      "stop_name": "Brescia",
+      "location_code": "BSC",
+      "rfi_location_code": "734",
+      "arrival_time": "12:33:00",
+      "departure_time": null
+    }
+  ]
+}
