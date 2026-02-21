@@ -1,7 +1,7 @@
 {
   "train_number": "9939",
-  "last_update": "16:36",
-  "captured_utc": "20260221T154058Z",
+  "last_update": "17:44",
+  "captured_utc": "20260221T164925Z",
   "origin_station": "Torino Porta Nuova",
   "destination_station": "Bari Centrale",
   "origin_code": "TOP",
@@ -97,6 +97,14 @@
     },
     {
       "stop_sequence": 11,
+      "stop_name": null,
+      "location_code": "MCA",
+      "rfi_location_code": null,
+      "arrival_time": "19:53:00",
+      "departure_time": "19:57:00"
+    },
+    {
+      "stop_sequence": 12,
       "stop_name": "Foggia",
       "location_code": "FG_",
       "rfi_location_code": "1334",
@@ -104,7 +112,7 @@
       "departure_time": "20:54:00"
     },
     {
-      "stop_sequence": 12,
+      "stop_sequence": 13,
       "stop_name": "Barletta",
       "location_code": "BLT",
       "rfi_location_code": "598",
@@ -112,7 +120,7 @@
       "departure_time": "21:28:00"
     },
     {
-      "stop_sequence": 13,
+      "stop_sequence": 14,
       "stop_name": "Trani",
       "location_code": "TR_",
       "rfi_location_code": "2902",
@@ -120,7 +128,7 @@
       "departure_time": "21:37:00"
     },
     {
-      "stop_sequence": 14,
+      "stop_sequence": 15,
       "stop_name": "Bisceglie",
       "location_code": "BIG",
       "rfi_location_code": "652",
@@ -128,7 +136,7 @@
       "departure_time": "21:45:00"
     },
     {
-      "stop_sequence": 15,
+      "stop_sequence": 16,
       "stop_name": "Molfetta",
       "location_code": "ML_",
       "rfi_location_code": "652",
@@ -136,7 +144,7 @@
       "departure_time": "21:53:00"
     },
     {
-      "stop_sequence": 16,
+      "stop_sequence": 17,
       "stop_name": "Bari Centrale",
       "location_code": "BAC",
       "rfi_location_code": "995",
