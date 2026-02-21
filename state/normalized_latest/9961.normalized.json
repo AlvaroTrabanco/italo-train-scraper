@@ -1,7 +1,7 @@
 {
   "train_number": "9961",
-  "last_update": "20:37",
-  "captured_utc": "20260221T193849Z",
+  "last_update": "21:40",
+  "captured_utc": "20260221T204047Z",
   "origin_station": "Torino Porta Nuova",
   "destination_station": "Roma Termini",
   "origin_code": "TOP",
@@ -57,6 +57,14 @@
     },
     {
       "stop_sequence": 6,
+      "stop_name": null,
+      "location_code": "RIF",
+      "rfi_location_code": null,
+      "arrival_time": "21:30:00",
+      "departure_time": "21:33:00"
+    },
+    {
+      "stop_sequence": 7,
       "stop_name": "Roma Tiburtina",
       "location_code": "RTB",
       "rfi_location_code": "2385",
@@ -64,7 +72,7 @@
       "departure_time": "23:12:00"
     },
     {
-      "stop_sequence": 7,
+      "stop_sequence": 8,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
