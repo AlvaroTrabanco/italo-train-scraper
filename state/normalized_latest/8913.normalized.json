@@ -1,11 +1,11 @@
 {
-  "train_number": "8911",
+  "train_number": "8913",
   "last_update": "14:10",
   "captured_utc": "20260221T131344Z",
   "origin_station": "Venezia Santa Lucia",
-  "destination_station": "Roma Termini",
+  "destination_station": "Salerno",
   "origin_code": "VSL",
-  "destination_code": "RMT",
+  "destination_code": "SAL",
   "stops": [
     {
       "stop_sequence": 0,
@@ -13,62 +13,78 @@
       "location_code": "VSL",
       "rfi_location_code": "3009",
       "arrival_time": null,
-      "departure_time": "11:05:00"
+      "departure_time": "13:05:00"
     },
     {
       "stop_sequence": 1,
       "stop_name": "Venezia Mestre",
       "location_code": "VEM",
       "rfi_location_code": "3002",
-      "arrival_time": "11:15:00",
-      "departure_time": "11:17:00"
+      "arrival_time": "13:15:00",
+      "departure_time": "13:17:00"
     },
     {
       "stop_sequence": 2,
       "stop_name": "Padova",
       "location_code": "PD_",
       "rfi_location_code": "2000",
-      "arrival_time": "11:33:00",
-      "departure_time": "11:35:00"
+      "arrival_time": "13:33:00",
+      "departure_time": "13:35:00"
     },
     {
       "stop_sequence": 3,
-      "stop_name": "Rovigo",
-      "location_code": "R__",
-      "rfi_location_code": "2445",
-      "arrival_time": "11:55:00",
-      "departure_time": "11:57:00"
+      "stop_name": "Ferrara",
+      "location_code": "F__",
+      "rfi_location_code": "1309",
+      "arrival_time": "14:09:00",
+      "departure_time": "14:11:00"
     },
     {
       "stop_sequence": 4,
       "stop_name": "Bologna centrale",
       "location_code": "BO2",
       "rfi_location_code": "942",
-      "arrival_time": "12:39:00",
-      "departure_time": "12:42:00"
+      "arrival_time": "14:39:00",
+      "departure_time": "14:42:00"
     },
     {
       "stop_sequence": 5,
       "stop_name": "Firenze Santa Maria Novella",
       "location_code": "SMN",
       "rfi_location_code": "1325",
-      "arrival_time": "13:20:00",
-      "departure_time": "13:28:00"
+      "arrival_time": "15:20:00",
+      "departure_time": "15:28:00"
     },
     {
       "stop_sequence": 6,
       "stop_name": "Roma Tiburtina",
       "location_code": "RTB",
       "rfi_location_code": "2385",
-      "arrival_time": "14:53:00",
-      "departure_time": "14:56:00"
+      "arrival_time": "16:53:00",
+      "departure_time": "16:56:00"
     },
     {
       "stop_sequence": 7,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
-      "arrival_time": "15:10:00",
+      "arrival_time": "17:05:00",
+      "departure_time": "17:15:00"
+    },
+    {
+      "stop_sequence": 8,
+      "stop_name": "Napoli Afragola",
+      "location_code": "NAF",
+      "rfi_location_code": "4020",
+      "arrival_time": "18:16:00",
+      "departure_time": "18:18:00"
+    },
+    {
+      "stop_sequence": 9,
+      "stop_name": "Salerno",
+      "location_code": "SAL",
+      "rfi_location_code": "2617",
+      "arrival_time": "18:59:00",
       "departure_time": null
     }
   ]
