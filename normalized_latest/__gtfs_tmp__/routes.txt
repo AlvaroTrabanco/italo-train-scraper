@@ -1,0 +1,83 @@
+route_id,agency_id,route_short_name,route_long_name,route_type
+R_8111,ITALO,8111,Milano Centrale – Reggio Calabria,2
+R_8900,ITALO,8900,Roma Termini – Venezia Santa Lucia,2
+R_8902,ITALO,8902,Trieste C.le – Napoli,2
+R_8903,ITALO,8903,Venezia Santa Lucia – Napoli,2
+R_8904,ITALO,8904,Napoli – Venezia Santa Lucia,2
+R_8905,ITALO,8905,Venezia Santa Lucia – Roma Termini,2
+R_8906,ITALO,8906,Roma Termini – Venezia Santa Lucia,2
+R_8907,ITALO,8907,Udine – Napoli,2
+R_8910,ITALO,8910,Salerno – Venezia Santa Lucia,2
+R_8911,ITALO,8911,Venezia Santa Lucia – Roma Termini,2
+R_8913,ITALO,8913,Venezia Santa Lucia – Salerno,2
+R_8914,ITALO,8914,Roma Termini – Venezia Santa Lucia,2
+R_8916,ITALO,8916,Roma Termini – Venezia Santa Lucia,2
+R_8918,ITALO,8918,Napoli – Trieste C.le,2
+R_8919,ITALO,8919,Venezia Santa Lucia – Salerno,2
+R_8923,ITALO,8923,Venezia Santa Lucia – Napoli,2
+R_8924,ITALO,8924,Roma Termini – Venezia Santa Lucia,2
+R_8925,ITALO,8925,Venezia Santa Lucia – Napoli,2
+R_8927,ITALO,8927,Venezia Santa Lucia – Roma Termini,2
+R_8928,ITALO,8928,Roma Termini – Venezia Santa Lucia,2
+R_8929,ITALO,8929,Venezia Santa Lucia – Napoli,2
+R_8953,ITALO,8953,Bolzano – Roma Termini,2
+R_8956,ITALO,8956,Napoli – Brescia,2
+R_8959,ITALO,8959,Brescia – Roma Termini,2
+R_8960,ITALO,8960,Roma Termini – Brescia,2
+R_8966,ITALO,8966,Roma Termini – Bolzano,2
+R_8967,ITALO,8967,Brescia – Roma Termini,2
+R_8970,ITALO,8970,Venezia Santa Lucia – Milano Centrale,2
+R_8971,ITALO,8971,Udine – Milano Centrale,2
+R_8973,ITALO,8973,Milano Centrale – Venezia Santa Lucia,2
+R_8974,ITALO,8974,Venezia Santa Lucia – Milano Centrale,2
+R_8977,ITALO,8977,Milano Centrale – Venezia Santa Lucia,2
+R_8978,ITALO,8978,Venezia Santa Lucia – Milano Centrale,2
+R_8981,ITALO,8981,Milano Centrale – Venezia Santa Lucia,2
+R_8983,ITALO,8983,Milano Centrale – Venezia Santa Lucia,2
+R_8984,ITALO,8984,Venezia Santa Lucia – Milano Centrale,2
+R_8986,ITALO,8986,Venezia Santa Lucia – Milano Centrale,2
+R_8987,ITALO,8987,Milano Centrale – Venezia Santa Lucia,2
+R_8988,ITALO,8988,Venezia Santa Lucia – Milano Centrale,2
+R_8992,ITALO,8992,Venezia Santa Lucia – Milano Centrale,2
+R_8993,ITALO,8993,Milano Centrale – Udine,2
+R_8995,ITALO,8995,Milano Centrale – Venezia Santa Lucia,2
+R_8997,ITALO,8997,Milano Centrale – Venezia Santa Lucia,2
+R_9900,ITALO,9900,Milano Centrale – Torino Porta Nuova,2
+R_9903,ITALO,9903,Roma Termini – Napoli,2
+R_9904,ITALO,9904,Roma Termini – Torino Porta Nuova,2
+R_9908,ITALO,9908,Napoli – Torino Porta Nuova,2
+R_9912,ITALO,9912,Napoli – Torino Porta Nuova,2
+R_9916,ITALO,9916,Salerno – Torino Porta Nuova,2
+R_9919,ITALO,9919,Torino Porta Nuova – Napoli,2
+R_9923,ITALO,9923,Torino Porta Nuova – Roma Termini,2
+R_9928,ITALO,9928,Bari Centrale – Torino Porta Nuova,2
+R_9935,ITALO,9935,Torino Porta Nuova – Napoli,2
+R_9939,ITALO,9939,Torino Porta Nuova – Bari Centrale,2
+R_9941,ITALO,9941,Brescia – Roma Termini,2
+R_9944,ITALO,9944,Roma Termini – Brescia,2
+R_9947,ITALO,9947,Torino Porta Nuova – Salerno,2
+R_9948,ITALO,9948,Napoli – Milano Centrale,2
+R_9951,ITALO,9951,Torino Porta Nuova – Salerno,2
+R_9955,ITALO,9955,Torino Porta Nuova – Napoli,2
+R_9961,ITALO,9961,Milano Centrale – Roma Termini,2
+R_9967,ITALO,9967,Milano Centrale – Napoli,2
+R_9969,ITALO,9969,Milano Centrale – Roma Termini,2
+R_9970,ITALO,9970,Napoli – Milano Centrale,2
+R_9971,ITALO,9971,Torino Porta Nuova – Salerno,2
+R_9974,ITALO,9974,Napoli – Milano Centrale,2
+R_9978,ITALO,9978,Roma Termini – Milano Centrale,2
+R_9979,ITALO,9979,Milano Centrale – Roma Termini,2
+R_9980,ITALO,9980,Napoli – Milano Centrale,2
+R_9982,ITALO,9982,Napoli – Milano Centrale,2
+R_9983,ITALO,9983,Milano Centrale – Roma Termini,2
+R_9984,ITALO,9984,Roma Termini – Milano Centrale,2
+R_9985,ITALO,9985,Milano Centrale – Roma Termini,2
+R_9986,ITALO,9986,Roma Termini – Milano Centrale,2
+R_9987,ITALO,9987,Milano Centrale – Napoli,2
+R_9989,ITALO,9989,Milano Centrale – Napoli,2
+R_9990,ITALO,9990,Roma Termini – Milano Centrale,2
+R_9992,ITALO,9992,Napoli – Genova Brignole,2
+R_9993,ITALO,9993,Milano Centrale – Roma Termini,2
+R_9994,ITALO,9994,Napoli – Torino Porta Nuova,2
+R_9996,ITALO,9996,Napoli – Milano Centrale,2
+R_9998,ITALO,9998,Genova Brignole – Napoli,2

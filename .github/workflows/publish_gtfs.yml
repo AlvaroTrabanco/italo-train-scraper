@@ -3,7 +3,7 @@ name: Build & Publish Italo GTFS + Stop Report
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12 * * * *" # hourly (UTC)
+    - cron: "12 */4 * * *"  # every 4 hours at :12 UTC
   push:
     branches: [ "main" ]
     paths:
@@ -12,10 +12,10 @@ on:
       - ".github/workflows/publish_gtfs.yml"
       - "scraper/trains.txt"
       - "index.html"
-      - "public/**"
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: italo-gtfs-publish
@@ -52,9 +52,14 @@ jobs:
         id: vars
         run: |
           # Service date is always "tomorrow"
-          echo "SERVICE_DATE=$(date -u -d 'tomorrow' +%Y%m%d)" >> $GITHUB_OUTPUT
+          SERVICE_DATE="$(date -u -d 'tomorrow' +%Y%m%d)"
+          echo "SERVICE_DATE=$SERVICE_DATE" >> $GITHUB_OUTPUT
+
           # Collection window = 8 days
           echo "WINDOW_HOURS=192" >> $GITHUB_OUTPUT
+
+          # Export for later steps (github-script reads env, not outputs)
+          echo "SERVICE_DATE=$SERVICE_DATE" >> $GITHUB_ENV
 
       - name: Restore persisted state (inventory + normalized_latest)
         run: |
@@ -146,10 +151,7 @@ jobs:
 
       - name: Build GTFS (stable + dated) from cumulative normalized_latest
         if: env.SKIP_RUN != '1'
-        env:
-          SERVICE_DATE: ${{ steps.vars.outputs.SERVICE_DATE }}
         run: |
-          SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
           WINDOW_HOURS="${{ steps.vars.outputs.WINDOW_HOURS }}"
           NORMDIR="normalized_latest"
 
@@ -170,7 +172,7 @@ jobs:
           cp -f normalized_latest/*.normalized.json public/state/normalized_latest/ 2>/dev/null || true
 
           NORM_COUNT=$(ls -1 normalized_latest | wc -l)
-          TRIPS_COUNT=$(python3 -c 'import os,zipfile; sd=os.environ["SERVICE_DATE"]; zp=f"gtfs/italo_{sd}.zip"; z=zipfile.ZipFile(zp); lines=z.read("trips.txt").decode("utf-8","replace").splitlines(); print(max(0,len(lines)-1))' )
+          TRIPS_COUNT=$(python3 -c 'import os,zipfile; sd=os.environ["SERVICE_DATE"]; zp=f"gtfs/italo_{sd}.zip"; z=zipfile.ZipFile(zp); lines=z.read("trips.txt").decode("utf-8","replace").splitlines(); print(max(0,len(lines)-1))')
 
           cat > public/gtfs/latest.json <<EOF
           {
@@ -204,6 +206,92 @@ jobs:
             $( [ -f "$INV_IN" ] && echo "--inventory-in $INV_IN" ) \
             --inventory-out "public/reports/stop_inventory.json" \
             --window-hours "${{ steps.vars.outputs.WINDOW_HOURS }}"
+
+      - name: Alert if missing coordinates (create/update issue)
+        if: env.SKIP_RUN != '1'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+
+            const path = "public/reports/stops_report_latest.csv";
+            if (!fs.existsSync(path)) {
+              core.setFailed(`Missing report file: ${path}`);
+              return;
+            }
+
+            const csv = fs.readFileSync(path, "utf8").trim().split(/\r?\n/);
+            if (csv.length <= 1) {
+              console.log("Report is empty (no rows).");
+              return;
+            }
+
+            const rows = csv.slice(1).map(line => line.split(","));
+            const missing = rows.filter(r => (r[1] || "").trim() === "MISSING_COORDINATES");
+            const newNotIn = rows.filter(r => (r[1] || "").trim() === "NEW_NOT_IN_COORDINATES");
+
+            const missingCount = missing.length;
+            const newCount = newNotIn.length;
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = "Italo GTFS: Missing stop coordinates";
+
+            const runUtc = process.env.RUN_UTC || "(unknown)";
+            const serviceDate = process.env.SERVICE_DATE || "(unknown)";
+
+            // Find existing open issue with same title
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner, repo, state: "open", per_page: 50,
+            });
+            const existing = issues.find(i => i.title === title);
+
+            if (missingCount === 0 && newCount === 0) {
+              console.log("No missing/new stops. No alert needed.");
+
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner, repo, issue_number: existing.number,
+                  body: `✅ All good now.\n\nRun: \`${runUtc}\`\nService date: \`${serviceDate}\``,
+                });
+                await github.rest.issues.update({
+                  owner, repo, issue_number: existing.number,
+                  state: "closed",
+                });
+              }
+              return;
+            }
+
+            function topList(items, n=50) {
+              return items.slice(0, n).map(r => `- ${r[0]}`).join("\n");
+            }
+
+            const body =
+              `🚨 Some stops are missing coordinates.\n\n` +
+              `Run: \`${runUtc}\`\n` +
+              `Service date: \`${serviceDate}\`\n\n` +
+              `Counts:\n` +
+              `- MISSING_COORDINATES: **${missingCount}**\n` +
+              `- NEW_NOT_IN_COORDINATES: **${newCount}**\n\n` +
+              `Report (GitHub Pages):\n` +
+              `- reports/stops_report_latest.csv\n` +
+              `- reports/stops_report_latest.md\n\n` +
+              `Top MISSING_COORDINATES:\n${topList(missing)}\n\n` +
+              `Top NEW_NOT_IN_COORDINATES:\n${topList(newNotIn)}\n`;
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: existing.number,
+                body,
+              });
+              console.log(`Updated existing issue #${existing.number}`);
+            } else {
+              const created = await github.rest.issues.create({
+                owner, repo, title, body,
+                labels: ["alert"],
+              });
+              console.log(`Created issue #${created.data.number}`);
+            }
 
       - name: Publish to GitHub Pages (gh-pages)
         uses: peaceiris/actions-gh-pages@v4
