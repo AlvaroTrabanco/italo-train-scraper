@@ -2,7 +2,6 @@ departure,arrival,status,trains,gtfs_route_long_names
 Torino Porta Nuova,Bari Centrale,OK,9939,Torino Porta Nuova – Bari Centrale
 Bari Centrale,Torino Porta Nuova,OK,9928,Bari Centrale – Torino Porta Nuova
 Roma Termini,Bari Centrale,MISSING_IN_GTFS,,
-Bari Centrale,Torino Porta Nuova,OK,9928,Bari Centrale – Torino Porta Nuova
 Bolzano,Roma Termini,OK,8953,Bolzano – Roma Termini
 Roma Termini,Bolzano,OK,8966,Roma Termini – Bolzano
 Napoli,Genova Brignole,OK,9992,Napoli – Genova Brignole

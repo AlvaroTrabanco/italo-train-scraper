@@ -1,6 +1,6 @@
 # Missing routes report
 
-- Expected pairs: **47**
+- Expected pairs: **46**
 - Missing in GTFS: **11**
 
 ## Missing (Expected but not in GTFS)
@@ -24,7 +24,6 @@
 | departure | arrival | trains |
 |---|---|---|
 | Torino Porta Nuova | Bari Centrale | 9939 |
-| Bari Centrale | Torino Porta Nuova | 9928 |
 | Bari Centrale | Torino Porta Nuova | 9928 |
 | Bolzano | Roma Termini | 8953 |
 | Roma Termini | Bolzano | 8966 |
