@@ -1,0 +1,48 @@
+﻿Departure_raw,Arrival_raw,Departure_mapped,Arrival_mapped,needs_review
+Torino,Bari,Torino Porta Nuova,Bari Centrale,NO
+Bari,Torino,Bari Centrale,Torino Porta Nuova,NO
+Roma,Bari,Roma Termini,Bari Centrale,NO
+Bari,Torino,Bari Centrale,Torino Porta Nuova,NO
+Bolzano,Roma,Bolzano,Roma Termini,NO
+Roma,Bolzano,Roma Termini,Bolzano,NO
+Napoli,Brignole (Genoa),Napoli,Genova Brignole,NO
+Brignole (Genoa),Napoli,Genova Brignole,Napoli,NO
+Udine,Milano,Udine,Milano Centrale,NO
+Milano,Udine,Milano Centrale,Udine,NO
+Udine,Napoli,Udine,Napoli,NO
+Napoli,Udine,Napoli,Udine,NO
+Trieste,Napoli,Trieste C.le,Napoli,NO
+Napoli,Trieste,Napoli,Trieste C.le,NO
+Reggio Calabria,Roma,Reggio Calabria,Roma Termini,NO
+Roma,Reggio Calabria,Roma Termini,Reggio Calabria,NO
+Reggio Calabria,Torino,Reggio Calabria,Torino Porta Nuova,NO
+Torino,Reggio Calabria,Torino Porta Nuova,Reggio Calabria,NO
+Reggio Calabria,Milano,Reggio Calabria,Milano Centrale,NO
+Milano,Reggio Calabria,Milano Centrale,Reggio Calabria,NO
+Venezia,Milano,Venezia Santa Lucia,Milano Centrale,NO
+Milano,Venezia,Milano Centrale,Venezia Santa Lucia,NO
+Venezia,Roma,Venezia Santa Lucia,Roma Termini,NO
+Roma,Venezia,Roma Termini,Venezia Santa Lucia,NO
+Venezia,Salerno,Venezia Santa Lucia,Salerno,NO
+Salerno,Venezia,Salerno,Venezia Santa Lucia,NO
+Venezia,Napoli,Venezia Santa Lucia,Napoli,NO
+Napoli,Venezia,Napoli,Venezia Santa Lucia,NO
+Torino,Salerno,Torino Porta Nuova,Salerno,NO
+Salerno,Torino,Salerno,Torino Porta Nuova,NO
+Torino,Roma,Torino Porta Nuova,Roma Termini,NO
+Roma,Torino,Roma Termini,Torino Porta Nuova,NO
+Torino,Napoli,Torino Porta Nuova,Napoli,NO
+Napoli,Torino,Napoli,Torino Porta Nuova,NO
+Milano,Torino,Milano Centrale,Torino Porta Nuova,NO
+Napoli,Brescia,Napoli,Brescia,NO
+Brescia,Napoli,Brescia,Napoli,NO
+Roma,Brescia,Roma Termini,Brescia,NO
+Brescia,Roma,Brescia,Roma Termini,NO
+Milano,Salerno,Milano Centrale,Salerno,NO
+Salerno,Milano,Salerno,Milano Centrale,NO
+Milano,Napoli,Milano Centrale,Napoli,NO
+Napoli,Milano,Napoli,Milano Centrale,NO
+Milano,Roma,Milano Centrale,Roma Termini,NO
+Roma,Milano,Roma Termini,Milano Centrale,NO
+Caserta (Napoli),Milano,Caserta,Milano Centrale,NO
+Roma,Napoli,Roma Termini,Napoli,NO

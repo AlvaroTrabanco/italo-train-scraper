@@ -3,12 +3,9 @@ import argparse
 import csv
 import os
 import re
-import sys
 import zipfile
 from dataclasses import dataclass
 from typing import Dict, List, Tuple, Optional
-
-from openpyxl import load_workbook, Workbook
 
 
 def norm(s: str) -> str:
@@ -34,7 +31,6 @@ def read_gtfs_routes_from_zip(zip_path: str) -> List[Dict[str, str]]:
     header = [h.strip() for h in raw[0].split(",")]
     rows: List[Dict[str, str]] = []
     for line in raw[1:]:
-        # routes.txt here is simple CSV without quotes/commas in fields; safe split
         parts = line.split(",")
         if len(parts) < len(header):
             parts += [""] * (len(header) - len(parts))
@@ -45,7 +41,7 @@ def read_gtfs_routes_from_zip(zip_path: str) -> List[Dict[str, str]]:
 
 def parse_route_long_name(route_long_name: str) -> Tuple[str, str]:
     """
-    Your build_gtfs writes route_long_name as "{origin} – {dest}" (note EN DASH).
+    Your build_gtfs writes route_long_name as "{origin} – {dest}" (EN DASH).
     Fallbacks included.
     """
     s = (route_long_name or "").strip()
@@ -55,52 +51,50 @@ def parse_route_long_name(route_long_name: str) -> Tuple[str, str]:
     if " - " in s:
         a, b = s.split(" - ", 1)
         return a.strip(), b.strip()
-    # last resort: cannot parse
     return s.strip(), ""
 
 
-def load_expected_xlsx(path: str) -> List[Dict[str, str]]:
+def load_expected_csv(path: str) -> List[Dict[str, str]]:
+    """
+    Reads expected routes from CSV.
+    Accepts columns:
+      - Departure_mapped + Arrival_mapped (preferred)
+      - or Departure + Arrival
+      - or From + To
+    """
     if not os.path.exists(path):
-        raise SystemExit(f"Expected routes xlsx not found: {path}")
+        raise SystemExit(f"Expected routes csv not found: {path}")
 
-    wb = load_workbook(path)
-    ws = wb.active
+    with open(path, "r", encoding="utf-8-sig", newline="") as f:
+        r = csv.DictReader(f)
+        if not r.fieldnames:
+            return []
 
-    # Header row is row 1
-    headers = [str(c.value).strip() if c.value is not None else "" for c in ws[1]]
-    header_idx = {h: i for i, h in enumerate(headers) if h}
+        fields = [c.strip() for c in r.fieldnames]
 
-    # We’ll try common column names without forcing you to rename anything.
-    # Priority: mapped names if present, otherwise raw.
-    dep_keys = ["Departure_mapped", "From_mapped", "Departure", "From"]
-    arr_keys = ["Arrival_mapped", "To_mapped", "Arrival", "To"]
+        def pick(keys: List[str]) -> Optional[str]:
+            for k in keys:
+                if k in fields:
+                    return k
+            return None
 
-    def pick_key(keys: List[str]) -> Optional[str]:
-        for k in keys:
-            if k in header_idx:
-                return k
-        return None
+        dep_col = pick(["Departure_mapped", "From_mapped", "Departure", "From"])
+        arr_col = pick(["Arrival_mapped", "To_mapped", "Arrival", "To"])
 
-    dep_col = pick_key(dep_keys)
-    arr_col = pick_key(arr_keys)
+        if not dep_col or not arr_col:
+            raise SystemExit(
+                "Expected CSV must contain Departure/Arrival columns (or *_mapped). "
+                f"Found headers: {fields}"
+            )
 
-    if not dep_col or not arr_col:
-        raise SystemExit(
-            f"Expected file must contain Departure/Arrival columns (or *_mapped). "
-            f"Found headers: {headers}"
-        )
-
-    out: List[Dict[str, str]] = []
-    for r in range(2, ws.max_row + 1):
-        dep = ws.cell(row=r, column=header_idx[dep_col] + 1).value
-        arr = ws.cell(row=r, column=header_idx[arr_col] + 1).value
-        dep_s = (str(dep).strip() if dep is not None else "")
-        arr_s = (str(arr).strip() if arr is not None else "")
-        if not dep_s and not arr_s:
-            continue
-        out.append({"departure": dep_s, "arrival": arr_s})
-
-    return out
+        out: List[Dict[str, str]] = []
+        for row in r:
+            dep = (row.get(dep_col) or "").strip()
+            arr = (row.get(arr_col) or "").strip()
+            if not dep and not arr:
+                continue
+            out.append({"departure": dep, "arrival": arr})
+        return out
 
 
 @dataclass
@@ -114,7 +108,7 @@ class MatchRow:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Compare expected A→B routes against GTFS routes.txt and output missing list.")
-    ap.add_argument("--expected-xlsx", required=True, help="Path to expected_routes_mapped.xlsx")
+    ap.add_argument("--expected-csv", required=True, help="Path to expected routes CSV (exported from your xlsx)")
     ap.add_argument("--gtfs-zip", required=True, help="Path to GTFS zip (italo_latest.zip or dated zip)")
     ap.add_argument("--out-dir", required=True, help="Output directory (e.g. public/reports)")
     ap.add_argument("--out-prefix", default="missing_routes", help="Output basename prefix (default missing_routes)")
@@ -122,7 +116,7 @@ def main() -> None:
 
     os.makedirs(args.out_dir, exist_ok=True)
 
-    expected = load_expected_xlsx(args.expected_xlsx)
+    expected = load_expected_csv(args.expected_csv)
     gtfs_routes = read_gtfs_routes_from_zip(args.gtfs_zip)
 
     # Index GTFS by normalized (origin,dest)
@@ -175,10 +169,10 @@ def main() -> None:
         for r in results:
             w.writerow([r.departure, r.arrival, r.status, r.trains, r.gtfs_route_long_names])
 
-    # Write Markdown (easy visual scan in Pages)
+    # Write Markdown
     md_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.md")
     with open(md_path, "w", encoding="utf-8") as f:
-        f.write(f"# Missing routes report\n\n")
+        f.write("# Missing routes report\n\n")
         f.write(f"- Expected pairs: **{len(results)}**\n")
         f.write(f"- Missing in GTFS: **{missing_count}**\n\n")
 
@@ -194,19 +188,7 @@ def main() -> None:
             if r.status == "OK":
                 f.write(f"| {r.departure} | {r.arrival} | {r.trains} |\n")
 
-        f.write("\n")
-
-    # Write XLSX (useful for sorting/filtering)
-    xlsx_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.xlsx")
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "missing_routes"
-    ws.append(["departure", "arrival", "status", "trains", "gtfs_route_long_names"])
-    for r in results:
-        ws.append([r.departure, r.arrival, r.status, r.trains, r.gtfs_route_long_names])
-    wb.save(xlsx_path)
-
-    print(f"Wrote:\n- {csv_path}\n- {md_path}\n- {xlsx_path}\nMissing count: {missing_count}")
+    print(f"Wrote:\n- {csv_path}\n- {md_path}\nMissing count: {missing_count}")
 
 
 if __name__ == "__main__":
