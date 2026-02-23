@@ -1,38 +1,22 @@
 {
   "train_number": "9980",
-  "last_update": "14:53",
-  "captured_utc": "20260222T135603Z",
-  "origin_station": "Napoli",
+  "last_update": "12:18",
+  "captured_utc": "20260223T111947Z",
+  "origin_station": "Roma Termini",
   "destination_station": "Milano Centrale",
-  "origin_code": "NAC",
+  "origin_code": "RMT",
   "destination_code": "MC_",
   "stops": [
     {
       "stop_sequence": 0,
-      "stop_name": "Napoli",
-      "location_code": "NAC",
-      "rfi_location_code": "1888",
-      "arrival_time": null,
-      "departure_time": "10:35:00"
-    },
-    {
-      "stop_sequence": 1,
-      "stop_name": "Napoli Afragola",
-      "location_code": "NAF",
-      "rfi_location_code": "4020",
-      "arrival_time": "10:48:00",
-      "departure_time": "10:50:00"
-    },
-    {
-      "stop_sequence": 2,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
-      "arrival_time": "11:47:00",
+      "arrival_time": null,
       "departure_time": "12:10:00"
     },
     {
-      "stop_sequence": 3,
+      "stop_sequence": 1,
       "stop_name": "Milano Rogoredo",
       "location_code": "RG_",
       "rfi_location_code": "1720",
@@ -40,7 +24,7 @@
       "departure_time": "15:06:00"
     },
     {
-      "stop_sequence": 4,
+      "stop_sequence": 2,
       "stop_name": "Milano Centrale",
       "location_code": "MC_",
       "rfi_location_code": "1728",
