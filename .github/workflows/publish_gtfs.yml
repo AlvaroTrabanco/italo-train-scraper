@@ -194,6 +194,20 @@ jobs:
             echo "No index.html found (expected public/index.html in repo)."
           fi
 
+      - name: Expected routes vs GTFS (missing routes report)
+        if: env.SKIP_RUN != '1'
+        env:
+          SERVICE_DATE: ${{ steps.vars.outputs.SERVICE_DATE }}
+        run: |
+          SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
+
+          # Compare expected routes against the current GTFS we just built
+          python3 scraper/report_missing_routes.py \
+            --expected-xlsx "expected_routes_mapped.xlsx" \
+            --gtfs-zip "gtfs/italo_${SERVICE_DATE}.zip" \
+            --out-dir "public/reports" \
+            --out-prefix "missing_routes"
+
       - name: Stop coordinates report (cumulative)
         if: env.SKIP_RUN != '1'
         run: |

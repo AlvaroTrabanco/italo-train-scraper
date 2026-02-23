@@ -1,0 +1,43 @@
+{
+  "train_number": "9993",
+  "last_update": "20:37",
+  "captured_utc": "20260222T193847Z",
+  "origin_station": "Milano Centrale",
+  "destination_station": "Roma Termini",
+  "origin_code": "MC_",
+  "destination_code": "RMT",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Milano Centrale",
+      "location_code": "MC_",
+      "rfi_location_code": "1728",
+      "arrival_time": null,
+      "departure_time": "17:45:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "18:49:00",
+      "departure_time": "18:52:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Roma Tiburtina",
+      "location_code": "RTB",
+      "rfi_location_code": "2385",
+      "arrival_time": "20:49:00",
+      "departure_time": "20:52:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "21:05:00",
+      "departure_time": null
+    }
+  ]
+}
