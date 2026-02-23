@@ -39,7 +39,7 @@ Roma Termini,Brescia,OK,8960,"8960, 9944",Roma Termini – Brescia
 Brescia,Roma Termini,OK,"8959, 9941","8959, 8967, 9941",Brescia – Roma Termini
 Milano Centrale,Salerno,MISSING_IN_GTFS,"9991, 9977, 9931",,
 Salerno,Milano Centrale,MISSING_IN_GTFS,"9950, 9962, 9954",,
-Milano Centrale,Napoli,OK,"9987, 9967, 9995, 9975, 9981, 9989","9967, 9987, 9989",Milano Centrale – Napoli
+Milano Centrale,Napoli,OK,"9987, 9967, 9995, 9975, 9981, 9989","9967, 9987, 9989, 9995",Milano Centrale – Napoli
 Napoli,Milano Centrale,OK,"9980, 9996, 9970, 9932, 9982, 9974, 9948","9948, 9970, 9974, 9982, 9996",Napoli – Milano Centrale
 Milano Centrale,Roma Termini,OK,"9979, 9993, 9985, 9983, 9969, 9961, 9997","9961, 9969, 9979, 9983, 9985, 9993",Milano Centrale – Roma Termini
 Roma Termini,Milano Centrale,OK,"9984, 9944, 9986, 9978, 9976, 9990","9978, 9980, 9984, 9986, 9990",Roma Termini – Milano Centrale

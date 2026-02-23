@@ -53,7 +53,7 @@
 | Napoli | Brescia | 8956 | 8956 |
 | Roma Termini | Brescia | 8960, 9944 | 8960 |
 | Brescia | Roma Termini | 8959, 8967, 9941 | 8959, 9941 |
-| Milano Centrale | Napoli | 9967, 9987, 9989 | 9987, 9967, 9995, 9975, 9981, 9989 |
+| Milano Centrale | Napoli | 9967, 9987, 9989, 9995 | 9987, 9967, 9995, 9975, 9981, 9989 |
 | Napoli | Milano Centrale | 9948, 9970, 9974, 9982, 9996 | 9980, 9996, 9970, 9932, 9982, 9974, 9948 |
 | Milano Centrale | Roma Termini | 9961, 9969, 9979, 9983, 9985, 9993 | 9979, 9993, 9985, 9983, 9969, 9961, 9997 |
 | Roma Termini | Milano Centrale | 9978, 9980, 9984, 9986, 9990 | 9984, 9944, 9986, 9978, 9976, 9990 |
