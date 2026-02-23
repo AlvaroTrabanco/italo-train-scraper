@@ -316,7 +316,62 @@ jobs:
             <li><a href="stops_report_latest.csv">Stops Report (CSV)</a></li>
           </ul>
           EOF
-          
+
+      - name: Create site index (root)
+        run: |
+          mkdir -p public
+          cat > public/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <title>Italo GTFS Export</title>
+            <style>
+              body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; margin: 2rem; max-width: 900px; }
+              .muted { color: #666; }
+              .card { border: 1px solid #ddd; border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; }
+              ul { margin: 0.5rem 0 0 1.25rem; }
+              code { background: #f6f6f6; padding: 0.15rem 0.35rem; border-radius: 6px; }
+              a { text-decoration: none; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>Italo GTFS Export</h1>
+            <p class="muted">
+              Published from the repo’s <code>gh-pages</code> branch. The workflow regenerates the GTFS and reports on schedule.
+            </p>
+
+            <div class="card">
+              <h2>Downloads</h2>
+              <ul>
+                <li><a href="gtfs/italo_latest.zip">italo_latest.zip</a> (stable URL)</li>
+                <li><a href="gtfs/latest.json">latest.json</a> (run metadata)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h2>Reports</h2>
+              <ul>
+                <li><a href="reports/">Open reports index</a></li>
+                <li><a href="reports/missing_routes_latest.md">Missing routes (MD)</a></li>
+                <li><a href="reports/stops_report_latest.md">Stops report (MD)</a></li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h2>How to update coordinates</h2>
+              <ol>
+                <li>Edit <code>coordinates.csv</code> locally</li>
+                <li><code>git pull</code> / <code>git push</code></li>
+                <li>Next run incorporates new lat/lon into <code>stops.txt</code></li>
+              </ol>
+            </div>
+          </body>
+          </html>
+          EOF
+      
       - name: Publish to GitHub Pages (gh-pages)
         uses: peaceiris/actions-gh-pages@v4
         with:
