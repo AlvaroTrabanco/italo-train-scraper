@@ -8,6 +8,53 @@ from dataclasses import dataclass
 from typing import Dict, List, Tuple, Optional
 
 
+def pick_train_col(headers: List[str]) -> Optional[str]:
+    """
+    Robustly detect the 'train numbers' column in expected_routes_mapped.csv.
+    Accepts a variety of header names; falls back to 3rd column if present.
+    """
+    if not headers:
+        return None
+
+    candidates = {
+        "train_numbers",
+        "train number",
+        "train numbers",
+        "line number",
+        "line numbers",
+        "line_number",
+        "line_numbers",
+        "trains",
+        "train",
+    }
+
+    # Exact match (case-insensitive)
+    for h in headers:
+        if h and h.strip().lower() in candidates:
+            return h
+
+    # Normalized match (whitespace/casing)
+    for h in headers:
+        if not h:
+            continue
+        hn = re.sub(r"\s+", " ", h.strip().lower())
+        if hn in candidates:
+            return h
+
+    # Fallback: 3rd column if file has >= 3 columns
+    if len(headers) == 3:
+        return headers[2]
+
+    return None
+
+
+def pretty_trains(s: str) -> str:
+    """
+    Normalize train lists like '9991,9977,9931' -> '9991, 9977, 9931'
+    """
+    parts = [p.strip() for p in (s or "").split(",") if p.strip()]
+    return ", ".join(parts)
+
 def norm(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "").strip().lower())
 
@@ -55,45 +102,50 @@ def parse_route_long_name(route_long_name: str) -> Tuple[str, str]:
 
 
 def load_expected_csv(path: str) -> List[Dict[str, str]]:
-    """
-    Reads expected routes from CSV.
-    Accepts columns:
-      - Departure_mapped + Arrival_mapped (preferred)
-      - or Departure + Arrival
-      - or From + To
-    """
     if not os.path.exists(path):
         raise SystemExit(f"Expected routes csv not found: {path}")
 
     with open(path, "r", encoding="utf-8-sig", newline="") as f:
-        r = csv.DictReader(f)
-        if not r.fieldnames:
-            return []
+        reader = csv.DictReader(f)
+        headers = reader.fieldnames or []
 
-        fields = [c.strip() for c in r.fieldnames]
+        # departure/arrival columns (mapped preferred)
+        dep_keys = ["Departure_mapped", "From_mapped", "Departure", "From"]
+        arr_keys = ["Arrival_mapped", "To_mapped", "Arrival", "To"]
 
-        def pick(keys: List[str]) -> Optional[str]:
+        def pick_col(keys: List[str]) -> Optional[str]:
             for k in keys:
-                if k in fields:
+                if k in headers:
                     return k
+            # case-insensitive fallback
+            lower_map = {h.lower(): h for h in headers if h}
+            for k in keys:
+                hk = lower_map.get(k.lower())
+                if hk:
+                    return hk
             return None
 
-        dep_col = pick(["Departure_mapped", "From_mapped", "Departure", "From"])
-        arr_col = pick(["Arrival_mapped", "To_mapped", "Arrival", "To"])
+        dep_col = pick_col(dep_keys)
+        arr_col = pick_col(arr_keys)
+        trains_col = pick_train_col(headers)
 
         if not dep_col or not arr_col:
             raise SystemExit(
-                "Expected CSV must contain Departure/Arrival columns (or *_mapped). "
-                f"Found headers: {fields}"
+                f"Expected file must contain Departure/Arrival (or *_mapped). Found headers: {headers}"
             )
 
         out: List[Dict[str, str]] = []
-        for row in r:
+        for row in reader:
             dep = (row.get(dep_col) or "").strip()
             arr = (row.get(arr_col) or "").strip()
             if not dep and not arr:
                 continue
-            out.append({"departure": dep, "arrival": arr})
+
+            exp_trains = (row.get(trains_col) or "").strip() if trains_col else ""
+            exp_trains = pretty_trains(exp_trains)
+
+            out.append({"departure": dep, "arrival": arr, "expected_trains": exp_trains})
+
         return out
 
 
@@ -102,7 +154,8 @@ class MatchRow:
     departure: str
     arrival: str
     status: str
-    trains: str
+    trains: str                  # trains found in GTFS
+    expected_trains: str         # trains from expected CSV
     gtfs_route_long_names: str
 
 
@@ -134,6 +187,7 @@ def main() -> None:
     for e in expected:
         dep = e["departure"]
         arr = e["arrival"]
+        exp_trains = e.get("expected_trains", "")
         key = (norm(dep), norm(arr))
         matches = idx.get(key, [])
 
@@ -146,6 +200,7 @@ def main() -> None:
                     arrival=arr,
                     status="OK",
                     trains=", ".join(trains),
+                    expected_trains=exp_trains,
                     gtfs_route_long_names=" | ".join(long_names),
                 )
             )
@@ -157,6 +212,7 @@ def main() -> None:
                     arrival=arr,
                     status="MISSING_IN_GTFS",
                     trains="",
+                    expected_trains=exp_trains,
                     gtfs_route_long_names="",
                 )
             )
@@ -165,9 +221,9 @@ def main() -> None:
     csv_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.csv")
     with open(csv_path, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["departure", "arrival", "status", "trains", "gtfs_route_long_names"])
+        w.writerow(["departure","arrival","status","expected_trains","trains","gtfs_route_long_names"])
         for r in results:
-            w.writerow([r.departure, r.arrival, r.status, r.trains, r.gtfs_route_long_names])
+            w.writerow([r.departure, r.arrival, r.status, r.expected_trains, r.trains, r.gtfs_route_long_names])
 
     # Write Markdown
     md_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.md")
@@ -177,16 +233,16 @@ def main() -> None:
         f.write(f"- Missing in GTFS: **{missing_count}**\n\n")
 
         f.write("## Missing (Expected but not in GTFS)\n\n")
-        f.write("| departure | arrival |\n|---|---|\n")
+        f.write("| departure | arrival | expected_trains |\n|---|---|---|\n")
         for r in results:
             if r.status == "MISSING_IN_GTFS":
-                f.write(f"| {r.departure} | {r.arrival} |\n")
+                f.write(f"| {r.departure} | {r.arrival} | {r.expected_trains} |\n")
 
         f.write("\n## Present (Expected and found in GTFS)\n\n")
-        f.write("| departure | arrival | trains |\n|---|---|---|\n")
+        f.write("| departure | arrival | trains | expected_trains |\n|---|---|---|---|\n")
         for r in results:
             if r.status == "OK":
-                f.write(f"| {r.departure} | {r.arrival} | {r.trains} |\n")
+                f.write(f"| {r.departure} | {r.arrival} | {r.trains} | {r.expected_trains} |\n")
 
     print(f"Wrote:\n- {csv_path}\n- {md_path}\nMissing count: {missing_count}")
 
