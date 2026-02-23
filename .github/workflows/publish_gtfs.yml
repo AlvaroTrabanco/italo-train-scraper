@@ -4,6 +4,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "12 * * * *" # hourly (UTC)
+  push:
+    branches: [ "main" ]
+    paths:
+      - "coordinates.csv"
+      - "scraper/**"
+      - ".github/workflows/publish_gtfs.yml"
+      - "scraper/trains.txt"
+      - "index.html"
+      - "public/**"
 
 permissions:
   contents: write
