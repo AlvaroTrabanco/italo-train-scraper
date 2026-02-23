@@ -201,9 +201,8 @@ jobs:
         run: |
           SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
 
-          # Compare expected routes against the current GTFS we just built
           python3 scraper/report_missing_routes.py \
-            --expected-xlsx "expected_routes_mapped.xlsx" \
+            --expected-csv "expected_routes_mapped.csv" \
             --gtfs-zip "gtfs/italo_${SERVICE_DATE}.zip" \
             --out-dir "public/reports" \
             --out-prefix "missing_routes"
