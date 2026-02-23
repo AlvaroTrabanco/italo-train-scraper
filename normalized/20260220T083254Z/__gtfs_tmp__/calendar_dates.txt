@@ -1,2 +1,0 @@
-service_id,date,exception_type
-SVC_20260220,20260220,1

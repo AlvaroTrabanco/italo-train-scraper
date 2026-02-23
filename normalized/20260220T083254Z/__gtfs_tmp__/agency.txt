@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone
-ITALO,Italo,https://www.italotreno.com/,Europe/Rome

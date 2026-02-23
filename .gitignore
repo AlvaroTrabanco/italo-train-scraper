@@ -1,0 +1,19 @@
+# generated scrape/output
+out/
+normalized/
+normalized_latest/
+tmp_raw/
+tmp_norm/
+
+# generated gtfs artifacts
+gtfs/*.zip
+gtfs/local_test*/
+**/__gtfs_tmp__/
+
+# local reports (keep none locally)
+reports/
+public/
+state/
+
+# OS / misc
+.DS_Store
