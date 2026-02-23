@@ -1,48 +1,47 @@
-﻿Departure_raw,Arrival_raw,Departure_mapped,Arrival_mapped,needs_review
-Torino,Bari,Torino Porta Nuova,Bari Centrale,NO
-Bari,Torino,Bari Centrale,Torino Porta Nuova,NO
-Roma,Bari,Roma Termini,Bari Centrale,NO
-Bari,Torino,Bari Centrale,Torino Porta Nuova,NO
-Bolzano,Roma,Bolzano,Roma Termini,NO
-Roma,Bolzano,Roma Termini,Bolzano,NO
-Napoli,Brignole (Genoa),Napoli,Genova Brignole,NO
-Brignole (Genoa),Napoli,Genova Brignole,Napoli,NO
-Udine,Milano,Udine,Milano Centrale,NO
-Milano,Udine,Milano Centrale,Udine,NO
-Udine,Napoli,Udine,Napoli,NO
-Napoli,Udine,Napoli,Udine,NO
-Trieste,Napoli,Trieste C.le,Napoli,NO
-Napoli,Trieste,Napoli,Trieste C.le,NO
-Reggio Calabria,Roma,Reggio Calabria,Roma Termini,NO
-Roma,Reggio Calabria,Roma Termini,Reggio Calabria,NO
-Reggio Calabria,Torino,Reggio Calabria,Torino Porta Nuova,NO
-Torino,Reggio Calabria,Torino Porta Nuova,Reggio Calabria,NO
-Reggio Calabria,Milano,Reggio Calabria,Milano Centrale,NO
-Milano,Reggio Calabria,Milano Centrale,Reggio Calabria,NO
-Venezia,Milano,Venezia Santa Lucia,Milano Centrale,NO
-Milano,Venezia,Milano Centrale,Venezia Santa Lucia,NO
-Venezia,Roma,Venezia Santa Lucia,Roma Termini,NO
-Roma,Venezia,Roma Termini,Venezia Santa Lucia,NO
-Venezia,Salerno,Venezia Santa Lucia,Salerno,NO
-Salerno,Venezia,Salerno,Venezia Santa Lucia,NO
-Venezia,Napoli,Venezia Santa Lucia,Napoli,NO
-Napoli,Venezia,Napoli,Venezia Santa Lucia,NO
-Torino,Salerno,Torino Porta Nuova,Salerno,NO
-Salerno,Torino,Salerno,Torino Porta Nuova,NO
-Torino,Roma,Torino Porta Nuova,Roma Termini,NO
-Roma,Torino,Roma Termini,Torino Porta Nuova,NO
-Torino,Napoli,Torino Porta Nuova,Napoli,NO
-Napoli,Torino,Napoli,Torino Porta Nuova,NO
-Milano,Torino,Milano Centrale,Torino Porta Nuova,NO
-Napoli,Brescia,Napoli,Brescia,NO
-Brescia,Napoli,Brescia,Napoli,NO
-Roma,Brescia,Roma Termini,Brescia,NO
-Brescia,Roma,Brescia,Roma Termini,NO
-Milano,Salerno,Milano Centrale,Salerno,NO
-Salerno,Milano,Salerno,Milano Centrale,NO
-Milano,Napoli,Milano Centrale,Napoli,NO
-Napoli,Milano,Napoli,Milano Centrale,NO
-Milano,Roma,Milano Centrale,Roma Termini,NO
-Roma,Milano,Roma Termini,Milano Centrale,NO
-Caserta (Napoli),Milano,Caserta,Milano Centrale,NO
-Roma,Napoli,Roma Termini,Napoli,NO
+﻿Departure_mapped,Arrival_mapped,train_numbers
+Torino Porta Nuova,Bari Centrale,9939
+Bari Centrale,Torino Porta Nuova,"9928,8140"
+Roma Termini,Bari Centrale,8141
+Bolzano,Roma Termini,"8963,8953"
+Roma Termini,Bolzano,8966
+Napoli,Genova Brignole,9992
+Genova Brignole,Napoli,9998
+Udine,Milano Centrale,8971
+Milano Centrale,Udine,8993
+Udine,Napoli,8907
+Napoli,Udine,8920
+Trieste C.le,Napoli,"8902,8102"
+Napoli,Trieste C.le,8918
+Reggio Calabria,Roma Termini,8192
+Roma Termini,Reggio Calabria,8191
+Reggio Calabria,Torino Porta Nuova,8134
+Torino Porta Nuova,Reggio Calabria,6143
+Reggio Calabria,Milano Centrale,8158
+Milano Centrale,Reggio Calabria,8111
+Venezia Santa Lucia,Milano Centrale,"8992,8988,8986,8978,8984,8970,8996,8980,8974"
+Milano Centrale,Venezia Santa Lucia,"8989,8995,8997,8983,8973,8987,8981,8977"
+Venezia Santa Lucia,Roma Termini,"8911,8905,8927"
+Roma Termini,Venezia Santa Lucia,"8924,8916,8914,8900,8906,8928"
+Venezia Santa Lucia,Salerno,"8919,8913"
+Salerno,Venezia Santa Lucia,8910
+Venezia Santa Lucia,Napoli,"8923,8929,8925,8903"
+Napoli,Venezia Santa Lucia,"8908,8904,8922"
+Torino Porta Nuova,Salerno,"9951,9971,9947"
+Salerno,Torino Porta Nuova,"9920,9916"
+Torino Porta Nuova,Roma Termini,"9963,9923"
+Roma Termini,Torino Porta Nuova,9904
+Torino Porta Nuova,Napoli,"9919,9927,9959,9955,9935"
+Napoli,Torino Porta Nuova,"9946,9940,9908,9912,9994,9924"
+Milano Centrale,Torino Porta Nuova,9900
+Napoli,Brescia,8956
+Brescia,Napoli,8967
+Roma Termini,Brescia,8960
+Brescia,Roma Termini,"8959,9941"
+Milano Centrale,Salerno,"9991,9977,9931"
+Salerno,Milano Centrale,"9950,9962,9954"
+Milano Centrale,Napoli,"9987,9967,9995,9975,9981,9989"
+Napoli,Milano Centrale,"9980,9996,9970,9932,9982,9974,9948"
+Milano Centrale,Roma Termini,"9979,9993,9985,9983,9969,9961,9997"
+Roma Termini,Milano Centrale,"9984,9944,9986,9978,9976,9990"
+Caserta,Milano Centrale,9972
+Roma Termini,Napoli,9903
