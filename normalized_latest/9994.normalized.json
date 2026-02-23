@@ -1,0 +1,67 @@
+{
+  "train_number": "9994",
+  "last_update": "22:38",
+  "captured_utc": "20260222T214021Z",
+  "origin_station": "Napoli",
+  "destination_station": "Torino Porta Nuova",
+  "origin_code": "NAC",
+  "destination_code": "TOP",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Napoli",
+      "location_code": "NAC",
+      "rfi_location_code": "1888",
+      "arrival_time": null,
+      "departure_time": "17:30:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Napoli Afragola",
+      "location_code": "NAF",
+      "rfi_location_code": "4020",
+      "arrival_time": "17:46:00",
+      "departure_time": "17:48:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "18:45:00",
+      "departure_time": "19:04:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "21:08:00",
+      "departure_time": "21:11:00"
+    },
+    {
+      "stop_sequence": 4,
+      "stop_name": "Milano Centrale",
+      "location_code": "MC_",
+      "rfi_location_code": "1728",
+      "arrival_time": "22:15:00",
+      "departure_time": "22:30:00"
+    },
+    {
+      "stop_sequence": 5,
+      "stop_name": "Torino Porta di Susa",
+      "location_code": "OUE",
+      "rfi_location_code": "3163",
+      "arrival_time": "23:19:00",
+      "departure_time": "23:21:00"
+    },
+    {
+      "stop_sequence": 6,
+      "stop_name": "Torino Porta Nuova",
+      "location_code": "TOP",
+      "rfi_location_code": "2876",
+      "arrival_time": "23:30:00",
+      "departure_time": null
+    }
+  ]
+}

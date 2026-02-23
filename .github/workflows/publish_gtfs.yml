@@ -188,7 +188,7 @@ jobs:
         run: |
           INV_IN="tmp_prev/stop_inventory.json"
           python scraper/report_stops.py \
-            --normalized-dir "normalized/$RUN_UTC" \
+            --normalized-dir "normalized_latest" \
             --coordinates "coordinates.csv" \
             --out-dir "public/reports" \
             --run-utc "$RUN_UTC" \
