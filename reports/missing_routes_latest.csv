@@ -1,47 +1,47 @@
-departure,arrival,status,trains,gtfs_route_long_names
-Torino Porta Nuova,Bari Centrale,OK,9939,Torino Porta Nuova – Bari Centrale
-Bari Centrale,Torino Porta Nuova,OK,9928,Bari Centrale – Torino Porta Nuova
-Roma Termini,Bari Centrale,MISSING_IN_GTFS,,
-Bolzano,Roma Termini,OK,8953,Bolzano – Roma Termini
-Roma Termini,Bolzano,OK,8966,Roma Termini – Bolzano
-Napoli,Genova Brignole,OK,9992,Napoli – Genova Brignole
-Genova Brignole,Napoli,OK,9998,Genova Brignole – Napoli
-Udine,Milano Centrale,OK,8971,Udine – Milano Centrale
-Milano Centrale,Udine,OK,8993,Milano Centrale – Udine
-Udine,Napoli,OK,8907,Udine – Napoli
-Napoli,Udine,MISSING_IN_GTFS,,
-Trieste C.le,Napoli,OK,8902,Trieste C.le – Napoli
-Napoli,Trieste C.le,OK,8918,Napoli – Trieste C.le
-Reggio Calabria,Roma Termini,MISSING_IN_GTFS,,
-Roma Termini,Reggio Calabria,MISSING_IN_GTFS,,
-Reggio Calabria,Torino Porta Nuova,MISSING_IN_GTFS,,
-Torino Porta Nuova,Reggio Calabria,MISSING_IN_GTFS,,
-Reggio Calabria,Milano Centrale,MISSING_IN_GTFS,,
-Milano Centrale,Reggio Calabria,OK,8111,Milano Centrale – Reggio Calabria
-Venezia Santa Lucia,Milano Centrale,OK,"8970, 8974, 8978, 8984, 8986, 8988, 8992",Venezia Santa Lucia – Milano Centrale
-Milano Centrale,Venezia Santa Lucia,OK,"8973, 8977, 8981, 8983, 8987, 8995, 8997",Milano Centrale – Venezia Santa Lucia
-Venezia Santa Lucia,Roma Termini,OK,"8905, 8911, 8927",Venezia Santa Lucia – Roma Termini
-Roma Termini,Venezia Santa Lucia,OK,"8900, 8906, 8914, 8916, 8924, 8928",Roma Termini – Venezia Santa Lucia
-Venezia Santa Lucia,Salerno,OK,"8913, 8919",Venezia Santa Lucia – Salerno
-Salerno,Venezia Santa Lucia,OK,8910,Salerno – Venezia Santa Lucia
-Venezia Santa Lucia,Napoli,OK,"8903, 8923, 8925, 8929",Venezia Santa Lucia – Napoli
-Napoli,Venezia Santa Lucia,OK,8904,Napoli – Venezia Santa Lucia
-Torino Porta Nuova,Salerno,OK,"9947, 9951, 9971",Torino Porta Nuova – Salerno
-Salerno,Torino Porta Nuova,OK,9916,Salerno – Torino Porta Nuova
-Torino Porta Nuova,Roma Termini,OK,9923,Torino Porta Nuova – Roma Termini
-Roma Termini,Torino Porta Nuova,OK,9904,Roma Termini – Torino Porta Nuova
-Torino Porta Nuova,Napoli,OK,"9919, 9935, 9955",Torino Porta Nuova – Napoli
-Napoli,Torino Porta Nuova,OK,"9908, 9912, 9994",Napoli – Torino Porta Nuova
-Milano Centrale,Torino Porta Nuova,OK,9900,Milano Centrale – Torino Porta Nuova
-Napoli,Brescia,OK,8956,Napoli – Brescia
-Brescia,Napoli,MISSING_IN_GTFS,,
-Roma Termini,Brescia,OK,"8960, 9944",Roma Termini – Brescia
-Brescia,Roma Termini,OK,"8959, 8967, 9941",Brescia – Roma Termini
-Milano Centrale,Salerno,MISSING_IN_GTFS,,
-Salerno,Milano Centrale,MISSING_IN_GTFS,,
-Milano Centrale,Napoli,OK,"9967, 9987, 9989",Milano Centrale – Napoli
-Napoli,Milano Centrale,OK,"9948, 9970, 9974, 9982, 9996",Napoli – Milano Centrale
-Milano Centrale,Roma Termini,OK,"9961, 9969, 9979, 9983, 9985, 9993",Milano Centrale – Roma Termini
-Roma Termini,Milano Centrale,OK,"9978, 9980, 9984, 9986, 9990",Roma Termini – Milano Centrale
-Caserta,Milano Centrale,MISSING_IN_GTFS,,
-Roma Termini,Napoli,OK,9903,Roma Termini – Napoli
+departure,arrival,status,expected_trains,trains,gtfs_route_long_names
+Torino Porta Nuova,Bari Centrale,OK,9939,9939,Torino Porta Nuova – Bari Centrale
+Bari Centrale,Torino Porta Nuova,OK,"9928, 8140",9928,Bari Centrale – Torino Porta Nuova
+Roma Termini,Bari Centrale,MISSING_IN_GTFS,8141,,
+Bolzano,Roma Termini,OK,"8963, 8953",8953,Bolzano – Roma Termini
+Roma Termini,Bolzano,OK,8966,8966,Roma Termini – Bolzano
+Napoli,Genova Brignole,OK,9992,9992,Napoli – Genova Brignole
+Genova Brignole,Napoli,OK,9998,9998,Genova Brignole – Napoli
+Udine,Milano Centrale,OK,8971,8971,Udine – Milano Centrale
+Milano Centrale,Udine,OK,8993,8993,Milano Centrale – Udine
+Udine,Napoli,OK,8907,8907,Udine – Napoli
+Napoli,Udine,MISSING_IN_GTFS,8920,,
+Trieste C.le,Napoli,OK,"8902, 8102",8902,Trieste C.le – Napoli
+Napoli,Trieste C.le,OK,8918,8918,Napoli – Trieste C.le
+Reggio Calabria,Roma Termini,MISSING_IN_GTFS,8192,,
+Roma Termini,Reggio Calabria,MISSING_IN_GTFS,8191,,
+Reggio Calabria,Torino Porta Nuova,MISSING_IN_GTFS,8134,,
+Torino Porta Nuova,Reggio Calabria,MISSING_IN_GTFS,6143,,
+Reggio Calabria,Milano Centrale,MISSING_IN_GTFS,8158,,
+Milano Centrale,Reggio Calabria,OK,8111,8111,Milano Centrale – Reggio Calabria
+Venezia Santa Lucia,Milano Centrale,OK,"8992, 8988, 8986, 8978, 8984, 8970, 8996, 8980, 8974","8970, 8974, 8978, 8984, 8986, 8988, 8992",Venezia Santa Lucia – Milano Centrale
+Milano Centrale,Venezia Santa Lucia,OK,"8989, 8995, 8997, 8983, 8973, 8987, 8981, 8977","8973, 8977, 8981, 8983, 8987, 8995, 8997",Milano Centrale – Venezia Santa Lucia
+Venezia Santa Lucia,Roma Termini,OK,"8911, 8905, 8927","8905, 8911, 8927",Venezia Santa Lucia – Roma Termini
+Roma Termini,Venezia Santa Lucia,OK,"8924, 8916, 8914, 8900, 8906, 8928","8900, 8906, 8914, 8916, 8924, 8928",Roma Termini – Venezia Santa Lucia
+Venezia Santa Lucia,Salerno,OK,"8919, 8913","8913, 8919",Venezia Santa Lucia – Salerno
+Salerno,Venezia Santa Lucia,OK,8910,8910,Salerno – Venezia Santa Lucia
+Venezia Santa Lucia,Napoli,OK,"8923, 8929, 8925, 8903","8903, 8923, 8925, 8929",Venezia Santa Lucia – Napoli
+Napoli,Venezia Santa Lucia,OK,"8908, 8904, 8922",8904,Napoli – Venezia Santa Lucia
+Torino Porta Nuova,Salerno,OK,"9951, 9971, 9947","9947, 9951, 9971",Torino Porta Nuova – Salerno
+Salerno,Torino Porta Nuova,OK,"9920, 9916",9916,Salerno – Torino Porta Nuova
+Torino Porta Nuova,Roma Termini,OK,"9963, 9923",9923,Torino Porta Nuova – Roma Termini
+Roma Termini,Torino Porta Nuova,OK,9904,9904,Roma Termini – Torino Porta Nuova
+Torino Porta Nuova,Napoli,OK,"9919, 9927, 9959, 9955, 9935","9919, 9935, 9955",Torino Porta Nuova – Napoli
+Napoli,Torino Porta Nuova,OK,"9946, 9940, 9908, 9912, 9994, 9924","9908, 9912, 9994",Napoli – Torino Porta Nuova
+Milano Centrale,Torino Porta Nuova,OK,9900,9900,Milano Centrale – Torino Porta Nuova
+Napoli,Brescia,OK,8956,8956,Napoli – Brescia
+Brescia,Napoli,MISSING_IN_GTFS,8967,,
+Roma Termini,Brescia,OK,8960,"8960, 9944",Roma Termini – Brescia
+Brescia,Roma Termini,OK,"8959, 9941","8959, 8967, 9941",Brescia – Roma Termini
+Milano Centrale,Salerno,MISSING_IN_GTFS,"9991, 9977, 9931",,
+Salerno,Milano Centrale,MISSING_IN_GTFS,"9950, 9962, 9954",,
+Milano Centrale,Napoli,OK,"9987, 9967, 9995, 9975, 9981, 9989","9967, 9987, 9989",Milano Centrale – Napoli
+Napoli,Milano Centrale,OK,"9980, 9996, 9970, 9932, 9982, 9974, 9948","9948, 9970, 9974, 9982, 9996",Napoli – Milano Centrale
+Milano Centrale,Roma Termini,OK,"9979, 9993, 9985, 9983, 9969, 9961, 9997","9961, 9969, 9979, 9983, 9985, 9993",Milano Centrale – Roma Termini
+Roma Termini,Milano Centrale,OK,"9984, 9944, 9986, 9978, 9976, 9990","9978, 9980, 9984, 9986, 9990",Roma Termini – Milano Centrale
+Caserta,Milano Centrale,MISSING_IN_GTFS,9972,,
+Roma Termini,Napoli,OK,9903,9903,Roma Termini – Napoli
