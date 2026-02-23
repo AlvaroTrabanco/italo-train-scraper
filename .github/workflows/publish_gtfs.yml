@@ -305,7 +305,18 @@ jobs:
               });
               console.log(`Created issue #${created.data.number}`);
             }
-
+      - name: Create reports index
+        run: |
+          cat > public/reports/index.html <<EOF
+          <h1>Reports</h1>
+          <ul>
+            <li><a href="missing_routes_latest.md">Missing Routes (MD)</a></li>
+            <li><a href="missing_routes_latest.csv">Missing Routes (CSV)</a></li>
+            <li><a href="stops_report_latest.md">Stops Report (MD)</a></li>
+            <li><a href="stops_report_latest.csv">Stops Report (CSV)</a></li>
+          </ul>
+          EOF
+          
       - name: Publish to GitHub Pages (gh-pages)
         uses: peaceiris/actions-gh-pages@v4
         with:
