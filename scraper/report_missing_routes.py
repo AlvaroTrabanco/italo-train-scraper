@@ -157,6 +157,7 @@ class MatchRow:
     trains: str                  # trains found in GTFS
     expected_trains: str         # trains from expected CSV
     gtfs_route_long_names: str
+    missing_trains: str
 
 
 def main() -> None:
@@ -183,6 +184,7 @@ def main() -> None:
 
     results: List[MatchRow] = []
     missing_count = 0
+    partial_count = 0
 
     for e in expected:
         dep = e["departure"]
@@ -191,58 +193,70 @@ def main() -> None:
         key = (norm(dep), norm(arr))
         matches = idx.get(key, [])
 
-        if matches:
-            trains = sorted({m["train"] for m in matches if m["train"]})
-            long_names = sorted({m["long_name"] for m in matches if m["long_name"]})
-            results.append(
-                MatchRow(
-                    departure=dep,
-                    arrival=arr,
-                    status="OK",
-                    trains=", ".join(trains),
-                    expected_trains=exp_trains,
-                    gtfs_route_long_names=" | ".join(long_names),
-                )
-            )
-        else:
+        expected_set = set([t.strip() for t in exp_trains.split(",") if t.strip()])
+
+        gtfs_set = set()
+        long_names = []
+
+        for m in matches:
+            if m["train"]:
+                gtfs_set.add(m["train"])
+            if m["long_name"]:
+                long_names.append(m["long_name"])
+
+        missing_trains = expected_set - gtfs_set
+        extra_trains = gtfs_set - expected_set
+
+        if not matches:
+            status = "MISSING_ROUTE"
             missing_count += 1
-            results.append(
-                MatchRow(
-                    departure=dep,
-                    arrival=arr,
-                    status="MISSING_IN_GTFS",
-                    trains="",
-                    expected_trains=exp_trains,
-                    gtfs_route_long_names="",
-                )
+        elif missing_trains:
+            status = "PARTIAL_MISSING"
+            partial_count += 1
+        else:
+            status = "OK"
+
+        missing_trains_str = ", ".join(sorted(missing_trains))
+        
+        results.append(
+            MatchRow(
+                departure=dep,
+                arrival=arr,
+                status=status,
+                trains=", ".join(sorted(gtfs_set)),
+                expected_trains=", ".join(sorted(expected_set)),
+                gtfs_route_long_names=" | ".join(sorted(set(long_names))),
+                missing_trains=missing_trains_str,
             )
+        )
 
     # Write CSV
     csv_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.csv")
     with open(csv_path, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["departure","arrival","status","expected_trains","trains","gtfs_route_long_names"])
+        w.writerow(["departure","arrival","status","expected_trains","trains","missing_trains","gtfs_route_long_names"])
         for r in results:
-            w.writerow([r.departure, r.arrival, r.status, r.expected_trains, r.trains, r.gtfs_route_long_names])
+            w.writerow([r.departure, r.arrival, r.status, r.expected_trains, r.trains, r.missing_trains, r.gtfs_route_long_names])
 
     # Write Markdown
     md_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.md")
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("# Missing routes report\n\n")
         f.write(f"- Expected pairs: **{len(results)}**\n")
-        f.write(f"- Missing in GTFS: **{missing_count}**\n\n")
+        f.write(f"- Missing routes (no A→B in GTFS): **{missing_count}**\n")
+        f.write(f"- Partial routes (some trains missing): **{partial_count}**\n\n")
 
-        f.write("## Missing (Expected but not in GTFS)\n\n")
-        f.write("| departure | arrival | expected_trains |\n|---|---|---|\n")
+        f.write("## Missing or Partial\n\n")
+        f.write("| departure | arrival | status | expected_trains | found_trains | missing_trains |\n|---|---|---|---|---|---|\n")
         for r in results:
-            if r.status == "MISSING_IN_GTFS":
-                f.write(f"| {r.departure} | {r.arrival} | {r.expected_trains} |\n")
+            if r.status in ("MISSING_ROUTE", "PARTIAL_MISSING"):
+                f.write(f"| {r.departure} | {r.arrival} | {r.status} | {r.expected_trains} | {r.trains} | {r.missing_trains} |\n")
 
-        f.write("\n## Present (Expected and found in GTFS)\n\n")
-        f.write("| departure | arrival | trains | expected_trains |\n|---|---|---|---|\n")
+        f.write("\n## OK (all expected trains found)\n\n")
+        f.write("| departure | arrival | found_trains | expected_trains |\n|---|---|---|---|\n")
         for r in results:
             if r.status == "OK":
-                f.write(f"| {r.departure} | {r.arrival} | {r.trains} | {r.expected_trains} |\n")
+                f.write(f"| {r.departure} | {r.arrival} | {r.trains} | {r.expected_trains} | {r.missing_trains} |\n")
 
     print(f"Wrote:\n- {csv_path}\n- {md_path}\nMissing count: {missing_count}")
 
