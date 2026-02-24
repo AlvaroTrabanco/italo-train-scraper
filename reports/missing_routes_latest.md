@@ -1,7 +1,7 @@
 # Missing routes report
 
 - Expected pairs: **46**
-- Missing in GTFS: **11**
+- Missing in GTFS: **10**
 
 ## Missing (Expected but not in GTFS)
 
@@ -17,7 +17,6 @@
 | Brescia | Napoli | 8967 |
 | Milano Centrale | Salerno | 9991, 9977, 9931 |
 | Salerno | Milano Centrale | 9950, 9962, 9954 |
-| Caserta | Milano Centrale | 9972 |
 
 ## Present (Expected and found in GTFS)
 
@@ -43,7 +42,7 @@
 | Salerno | Venezia Santa Lucia | 8910 | 8910 |
 | Venezia Santa Lucia | Napoli | 8903, 8923, 8925, 8929 | 8923, 8929, 8925, 8903 |
 | Napoli | Venezia Santa Lucia | 8904 | 8908, 8904, 8922 |
-| Torino Porta Nuova | Salerno | 9947, 9951, 9971 | 9951, 9971, 9947 |
+| Torino Porta Nuova | Salerno | 9947, 9951 | 9951, 9971, 9947 |
 | Salerno | Torino Porta Nuova | 9916 | 9920, 9916 |
 | Torino Porta Nuova | Roma Termini | 9923 | 9963, 9923 |
 | Roma Termini | Torino Porta Nuova | 9904 | 9904 |
@@ -57,4 +56,5 @@
 | Napoli | Milano Centrale | 9948, 9970, 9974, 9982, 9996 | 9980, 9996, 9970, 9932, 9982, 9974, 9948 |
 | Milano Centrale | Roma Termini | 9961, 9969, 9979, 9983, 9985, 9993 | 9979, 9993, 9985, 9983, 9969, 9961, 9997 |
 | Roma Termini | Milano Centrale | 9978, 9980, 9984, 9986, 9990 | 9984, 9944, 9986, 9978, 9976, 9990 |
+| Caserta | Milano Centrale | 9972 | 9972 |
 | Roma Termini | Napoli | 9903 | 9903 |

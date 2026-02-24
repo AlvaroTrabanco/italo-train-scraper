@@ -1,7 +1,7 @@
 {
   "train_number": "9916",
-  "last_update": "12:18",
-  "captured_utc": "20260223T111947Z",
+  "last_update": "06:37",
+  "captured_utc": "20260224T053931Z",
   "origin_station": "Salerno",
   "destination_station": "Torino Porta Nuova",
   "origin_code": "SAL",
@@ -100,7 +100,7 @@
       "stop_name": "Torino Porta Nuova",
       "location_code": "TOP",
       "rfi_location_code": "2876",
-      "arrival_time": "13:30:00",
+      "arrival_time": "13:36:00",
       "departure_time": null
     }
   ]

@@ -1,7 +1,7 @@
 {
   "train_number": "9904",
-  "last_update": "10:05",
-  "captured_utc": "20260223T090750Z",
+  "last_update": "06:37",
+  "captured_utc": "20260224T053931Z",
   "origin_station": "Roma Termini",
   "destination_station": "Torino Porta Nuova",
   "origin_code": "RMT",
@@ -76,7 +76,7 @@
       "stop_name": "Torino Porta Nuova",
       "location_code": "TOP",
       "rfi_location_code": "2876",
-      "arrival_time": "10:30:00",
+      "arrival_time": "10:36:00",
       "departure_time": null
     }
   ]

@@ -1,0 +1,43 @@
+{
+  "train_number": "9972",
+  "last_update": "06:39",
+  "captured_utc": "20260224T053931Z",
+  "origin_station": "Caserta",
+  "destination_station": "Milano Centrale",
+  "origin_code": "CEA",
+  "destination_code": "MC_",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Caserta",
+      "location_code": "CEA",
+      "rfi_location_code": "945",
+      "arrival_time": null,
+      "departure_time": "06:45:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "07:50:00",
+      "departure_time": "08:05:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "10:08:00",
+      "departure_time": "10:11:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Milano Centrale",
+      "location_code": "MC_",
+      "rfi_location_code": "1728",
+      "arrival_time": "11:15:00",
+      "departure_time": null
+    }
+  ]
+}
