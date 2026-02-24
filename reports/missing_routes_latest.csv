@@ -9,7 +9,7 @@ Genova Brignole,Napoli,OK,9998,9998,,,Genova Brignole – Napoli
 Udine,Milano Centrale,OK,8971,8971,,,Udine – Milano Centrale
 Milano Centrale,Udine,OK,8993,8993,,,Milano Centrale – Udine
 Udine,Napoli,OK,8907,8907,,,Udine – Napoli
-Napoli,Udine,MISSING_ROUTE,8920,,8920,,
+Napoli,Udine,OK,8920,8920,,,Napoli – Udine
 Trieste C.le,Napoli,PARTIAL_MISSING,"8102, 8902",8902,8102,,Trieste C.le – Napoli
 Napoli,Trieste C.le,OK,8918,8918,,,Napoli – Trieste C.le
 Reggio Calabria,Roma Termini,MISSING_ROUTE,8192,,8192,,

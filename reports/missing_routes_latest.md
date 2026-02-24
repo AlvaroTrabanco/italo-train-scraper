@@ -1,7 +1,7 @@
 # Missing routes report
 
 - Expected pairs: **46**
-- Missing routes (no A→B in GTFS): **11**
+- Missing routes (no A→B in GTFS): **10**
 - Partial routes (some trains missing): **13**
 
 ## Coverage by route (exact train numbers)
@@ -11,7 +11,6 @@
 | Bari Centrale | Torino Porta Nuova | MISSING_ROUTE | 8140, 9928 |  | 8140, 9928 |  |
 | Brescia | Napoli | MISSING_ROUTE | 8967 |  | 8967 |  |
 | Milano Centrale | Salerno | MISSING_ROUTE | 9931, 9977, 9991 |  | 9931, 9977, 9991 |  |
-| Napoli | Udine | MISSING_ROUTE | 8920 |  | 8920 |  |
 | Reggio Calabria | Milano Centrale | MISSING_ROUTE | 8158 |  | 8158 |  |
 | Reggio Calabria | Roma Termini | MISSING_ROUTE | 8192 |  | 8192 |  |
 | Reggio Calabria | Torino Porta Nuova | MISSING_ROUTE | 8134 |  | 8134 |  |
@@ -42,6 +41,7 @@
 | Napoli | Genova Brignole | OK | 9992 | 9992 |  |  |
 | Napoli | Torino Porta Nuova | OK | 9908, 9912, 9924, 9940, 9946, 9994 | 9908, 9912, 9924, 9940, 9946, 9994 |  |  |
 | Napoli | Trieste C.le | OK | 8918 | 8918 |  |  |
+| Napoli | Udine | OK | 8920 | 8920 |  |  |
 | Roma Termini | Bolzano | OK | 8966 | 8966 |  |  |
 | Roma Termini | Brescia | OK | 8960 | 8960, 9944 |  | 9944 |
 | Roma Termini | Napoli | OK | 9903 | 9903 |  |  |
