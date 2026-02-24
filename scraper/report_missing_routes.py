@@ -9,10 +9,6 @@ from typing import Dict, List, Tuple, Optional
 
 
 def pick_train_col(headers: List[str]) -> Optional[str]:
-    """
-    Robustly detect the 'train numbers' column in expected_routes_mapped.csv.
-    Accepts a variety of header names; falls back to 3rd column if present.
-    """
     if not headers:
         return None
 
@@ -28,12 +24,10 @@ def pick_train_col(headers: List[str]) -> Optional[str]:
         "train",
     }
 
-    # Exact match (case-insensitive)
     for h in headers:
         if h and h.strip().lower() in candidates:
             return h
 
-    # Normalized match (whitespace/casing)
     for h in headers:
         if not h:
             continue
@@ -41,7 +35,6 @@ def pick_train_col(headers: List[str]) -> Optional[str]:
         if hn in candidates:
             return h
 
-    # Fallback: 3rd column if file has >= 3 columns
     if len(headers) >= 3:
         return headers[2]
 
@@ -49,21 +42,15 @@ def pick_train_col(headers: List[str]) -> Optional[str]:
 
 
 def pretty_trains(s: str) -> str:
-    """
-    Normalize train lists like '9991,9977,9931' -> '9991, 9977, 9931'
-    """
     parts = [p.strip() for p in (s or "").split(",") if p.strip()]
     return ", ".join(parts)
+
 
 def norm(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "").strip().lower())
 
 
 def read_gtfs_routes_from_zip(zip_path: str) -> List[Dict[str, str]]:
-    """
-    Reads routes.txt from the GTFS zip and returns rows as dicts.
-    Expects: route_id, agency_id, route_short_name, route_long_name, route_type
-    """
     if not os.path.exists(zip_path):
         raise SystemExit(f"GTFS zip not found: {zip_path}")
 
@@ -77,20 +64,18 @@ def read_gtfs_routes_from_zip(zip_path: str) -> List[Dict[str, str]]:
 
     header = [h.strip() for h in raw[0].split(",")]
     rows: List[Dict[str, str]] = []
+
     for line in raw[1:]:
         parts = line.split(",")
         if len(parts) < len(header):
             parts += [""] * (len(header) - len(parts))
         d = {header[i]: (parts[i] if i < len(parts) else "") for i in range(len(header))}
         rows.append(d)
+
     return rows
 
 
 def parse_route_long_name(route_long_name: str) -> Tuple[str, str]:
-    """
-    Your build_gtfs writes route_long_name as "{origin} – {dest}" (EN DASH).
-    Fallbacks included.
-    """
     s = (route_long_name or "").strip()
     if " – " in s:
         a, b = s.split(" – ", 1)
@@ -109,7 +94,6 @@ def load_expected_csv(path: str) -> List[Dict[str, str]]:
         reader = csv.DictReader(f)
         headers = reader.fieldnames or []
 
-        # departure/arrival columns (mapped preferred)
         dep_keys = ["Departure_mapped", "From_mapped", "Departure", "From"]
         arr_keys = ["Arrival_mapped", "To_mapped", "Arrival", "To"]
 
@@ -117,7 +101,6 @@ def load_expected_csv(path: str) -> List[Dict[str, str]]:
             for k in keys:
                 if k in headers:
                     return k
-            # case-insensitive fallback
             lower_map = {h.lower(): h for h in headers if h}
             for k in keys:
                 hk = lower_map.get(k.lower())
@@ -130,9 +113,7 @@ def load_expected_csv(path: str) -> List[Dict[str, str]]:
         trains_col = pick_train_col(headers)
 
         if not dep_col or not arr_col:
-            raise SystemExit(
-                f"Expected file must contain Departure/Arrival (or *_mapped). Found headers: {headers}"
-            )
+            raise SystemExit(f"Expected file must contain Departure/Arrival columns.")
 
         out: List[Dict[str, str]] = []
         for row in reader:
@@ -144,7 +125,11 @@ def load_expected_csv(path: str) -> List[Dict[str, str]]:
             exp_trains = (row.get(trains_col) or "").strip() if trains_col else ""
             exp_trains = pretty_trains(exp_trains)
 
-            out.append({"departure": dep, "arrival": arr, "expected_trains": exp_trains})
+            out.append({
+                "departure": dep,
+                "arrival": arr,
+                "expected_trains": exp_trains
+            })
 
         return out
 
@@ -154,19 +139,20 @@ class MatchRow:
     departure: str
     arrival: str
     status: str
-    trains: str                  # trains found in GTFS
-    expected_trains: str         # trains from expected CSV
-    gtfs_route_long_names: str
-    missing_trains: str
-    extra_trains: str
+    expected_trains: str
+    found_trains: str
+    missing_anywhere: str
+    missing_under_this_ab: str
+    present_elsewhere: str
+    extra_gtfs_trains: str
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Compare expected A→B routes against GTFS routes.txt and output missing list.")
-    ap.add_argument("--expected-csv", required=True, help="Path to expected routes CSV (exported from your xlsx)")
-    ap.add_argument("--gtfs-zip", required=True, help="Path to GTFS zip (italo_latest.zip or dated zip)")
-    ap.add_argument("--out-dir", required=True, help="Output directory (e.g. public/reports)")
-    ap.add_argument("--out-prefix", default="missing_routes", help="Output basename prefix (default missing_routes)")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--expected-csv", required=True)
+    ap.add_argument("--gtfs-zip", required=True)
+    ap.add_argument("--out-dir", required=True)
+    ap.add_argument("--out-prefix", default="missing_routes")
     args = ap.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
@@ -174,117 +160,112 @@ def main() -> None:
     expected = load_expected_csv(args.expected_csv)
     gtfs_routes = read_gtfs_routes_from_zip(args.gtfs_zip)
 
-    # Index GTFS by normalized (origin,dest)
-    idx: Dict[Tuple[str, str], List[Dict[str, str]]] = {}
+    # Global train index
+    train_to_longnames: Dict[str, set] = {}
     for r in gtfs_routes:
-        long_name = r.get("route_long_name", "") or ""
-        short = r.get("route_short_name", "") or ""  # train number in your feed
-        a, b = parse_route_long_name(long_name)
+        t = (r.get("route_short_name","") or "").strip()
+        ln = (r.get("route_long_name","") or "").strip()
+        if t:
+            train_to_longnames.setdefault(t, set()).add(ln)
+
+    # A→B index
+    idx: Dict[Tuple[str,str], List[str]] = {}
+    for r in gtfs_routes:
+        ln = r.get("route_long_name","") or ""
+        short = (r.get("route_short_name","") or "").strip()
+        a,b = parse_route_long_name(ln)
         key = (norm(a), norm(b))
-        idx.setdefault(key, []).append({"train": short.strip(), "long_name": long_name.strip()})
+        idx.setdefault(key, []).append(short)
 
     results: List[MatchRow] = []
-    missing_count = 0
-    partial_count = 0
 
     for e in expected:
         dep = e["departure"]
         arr = e["arrival"]
-        exp_trains = e.get("expected_trains", "")
+        expected_set = set([t.strip() for t in e["expected_trains"].split(",") if t.strip()])
+
         key = (norm(dep), norm(arr))
-        matches = idx.get(key, [])
+        found_under_ab = set(idx.get(key, []))
 
-        expected_set = set([t.strip() for t in exp_trains.split(",") if t.strip()])
+        # Missing completely
+        missing_anywhere = sorted([t for t in expected_set if t not in train_to_longnames])
 
-        gtfs_set = set()
-        long_names = []
+        # Missing only under this AB
+        missing_under_this_ab = sorted([t for t in expected_set if t not in found_under_ab])
 
-        for m in matches:
-            if m["train"]:
-                gtfs_set.add(m["train"])
-            if m["long_name"]:
-                long_names.append(m["long_name"])
+        # Present elsewhere
+        present_elsewhere = []
+        for t in expected_set:
+            if t in train_to_longnames and t not in found_under_ab:
+                present_elsewhere.append(
+                    f"{t} ({' | '.join(sorted(train_to_longnames[t]))})"
+                )
 
-        missing_trains = expected_set - gtfs_set
-        extra_trains = gtfs_set - expected_set
-        extra_trains_str = ", ".join(sorted(extra_trains))
+        extra_gtfs = sorted(found_under_ab - expected_set)
 
-        if not matches:
+        if not found_under_ab:
             status = "MISSING_ROUTE"
-            missing_count += 1
-        elif missing_trains:
+        elif missing_under_this_ab:
             status = "PARTIAL_MISSING"
-            partial_count += 1
         else:
             status = "OK"
 
-        missing_trains_str = ", ".join(sorted(missing_trains))
-        
         results.append(
             MatchRow(
                 departure=dep,
                 arrival=arr,
                 status=status,
-                trains=", ".join(sorted(gtfs_set)),
                 expected_trains=", ".join(sorted(expected_set)),
-                gtfs_route_long_names=" | ".join(sorted(set(long_names))),
-                missing_trains=missing_trains_str,
-                extra_trains=extra_trains_str,
+                found_trains=", ".join(sorted(found_under_ab)),
+                missing_anywhere=", ".join(missing_anywhere),
+                missing_under_this_ab=", ".join(missing_under_this_ab),
+                present_elsewhere=" ; ".join(present_elsewhere),
+                extra_gtfs_trains=", ".join(extra_gtfs),
             )
         )
 
-    # Write CSV
+    # CSV
     csv_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.csv")
-    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow([
-            "departure",
-            "arrival",
-            "status",
-            "expected_trains",
-            "found_trains",
-            "missing_expected_trains",
-            "extra_gtfs_trains",
-            "gtfs_route_long_names",
+            "departure","arrival","status",
+            "expected_trains","found_trains",
+            "missing_anywhere",
+            "missing_under_this_ab",
+            "present_elsewhere",
+            "extra_gtfs_trains"
         ])
-
         for r in results:
             w.writerow([
                 r.departure,
                 r.arrival,
                 r.status,
                 r.expected_trains,
-                r.trains,
-                r.missing_trains,
-                r.extra_trains,
-                r.gtfs_route_long_names,
+                r.found_trains,
+                r.missing_anywhere,
+                r.missing_under_this_ab,
+                r.present_elsewhere,
+                r.extra_gtfs_trains
             ])
 
-    # Write Markdown
+    # Markdown
     md_path = os.path.join(args.out_dir, f"{args.out_prefix}_latest.md")
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("# Missing routes report\n\n")
-        f.write(f"- Expected pairs: **{len(results)}**\n")
-        f.write(f"- Missing routes (no A→B in GTFS): **{missing_count}**\n")
-        f.write(f"- Partial routes (some trains missing): **{partial_count}**\n\n")
+        f.write("| departure | arrival | status | expected | found | missing anywhere | missing under this A–B | present elsewhere | extra |\n")
+        f.write("|---|---|---|---|---|---|---|---|---|\n")
 
-        f.write("## Coverage by route (exact train numbers)\n\n")
-        f.write("| departure | arrival | status | expected | found | missing (expected) | extra (GTFS) |\n")
-        f.write("|---|---|---|---|---|---|---|\n")
-
-        # Put problems first, then OK
-        def sort_key(r):
-            order = {"MISSING_ROUTE": 0, "PARTIAL_MISSING": 1, "OK": 2}
-            return (order.get(r.status, 9), r.departure, r.arrival)
-
-        for r in sorted(results, key=sort_key):
+        for r in results:
             f.write(
                 f"| {r.departure} | {r.arrival} | {r.status} | "
-                f"{r.expected_trains} | {r.trains} | {r.missing_trains} | {r.extra_trains} |\n"
+                f"{r.expected_trains} | {r.found_trains} | "
+                f"{r.missing_anywhere} | {r.missing_under_this_ab} | "
+                f"{r.present_elsewhere} | {r.extra_gtfs_trains} |\n"
             )
 
-    print(f"Wrote:\n- {csv_path}\n- {md_path}\nMissing count: {missing_count}")
-
+    print("Report generated.")
+    
 
 if __name__ == "__main__":
     main()

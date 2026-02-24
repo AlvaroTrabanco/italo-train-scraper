@@ -170,6 +170,8 @@ def main() -> None:
         kept_rows_for_trip: List[List[str]] = []
         seq = 0
 
+        kept_stop_names: List[str] = []
+
         for s in data.get("stops", []):
             name = (s.get("stop_name") or "").strip()
             code = (s.get("location_code") or "").strip()
@@ -182,6 +184,8 @@ def main() -> None:
                 continue
 
             stop_id = ensure_stop(code, name)
+
+            kept_stop_names.append(name)
 
             arr = s.get("arrival_time") or ""
             dep = s.get("departure_time") or ""
@@ -200,7 +204,11 @@ def main() -> None:
 
         # routes.txt row is "one per train number", but only keep if used
         # We'll append now and filter later, or just append only when used.
-        routes_rows.append([route_id, agency_id, str(train), f"{origin} – {dest}", "2"])
+        # Use first/last kept stop names to define route A–B (matches what we actually exported)
+        route_origin = kept_stop_names[0] if kept_stop_names else (origin or "")
+        route_dest = kept_stop_names[-1] if kept_stop_names else (dest or "")
+
+        routes_rows.append([route_id, agency_id, str(train), f"{route_origin} – {route_dest}", "2"])
         trips_rows.append([route_id, service_id, trip_id, str(train)])
         stop_times_rows.extend(kept_rows_for_trip)
 
