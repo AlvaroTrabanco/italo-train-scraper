@@ -1,5 +1,5 @@
 {
-  "train_number": "9924",
+  "train_number": "9940",
   "last_update": "14:37",
   "captured_utc": "20260224T133857Z",
   "origin_station": "Napoli",
@@ -13,86 +13,86 @@
       "location_code": "NAC",
       "rfi_location_code": "1888",
       "arrival_time": null,
-      "departure_time": "09:20:00"
+      "departure_time": "13:20:00"
     },
     {
       "stop_sequence": 1,
       "stop_name": "Napoli Afragola",
       "location_code": "NAF",
       "rfi_location_code": "4020",
-      "arrival_time": "09:32:00",
-      "departure_time": "09:34:00"
+      "arrival_time": "13:33:00",
+      "departure_time": "13:35:00"
     },
     {
       "stop_sequence": 2,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
-      "arrival_time": "10:30:00",
-      "departure_time": "10:40:00"
+      "arrival_time": "14:30:00",
+      "departure_time": "14:40:00"
     },
     {
       "stop_sequence": 3,
       "stop_name": "Roma Tiburtina",
       "location_code": "RTB",
       "rfi_location_code": "2385",
-      "arrival_time": "10:47:00",
-      "departure_time": "10:50:00"
+      "arrival_time": "14:47:00",
+      "departure_time": "14:50:00"
     },
     {
       "stop_sequence": 4,
       "stop_name": "Firenze Santa Maria Novella",
       "location_code": "SMN",
       "rfi_location_code": "1325",
-      "arrival_time": "12:17:00",
-      "departure_time": "12:25:00"
+      "arrival_time": "16:17:00",
+      "departure_time": "16:25:00"
     },
     {
       "stop_sequence": 5,
       "stop_name": "Bologna centrale",
       "location_code": "BO2",
       "rfi_location_code": "942",
-      "arrival_time": "13:03:00",
-      "departure_time": "13:06:00"
+      "arrival_time": "17:03:00",
+      "departure_time": "17:06:00"
     },
     {
       "stop_sequence": 6,
       "stop_name": "Mediopadana R.Emilia",
       "location_code": "AAV",
       "rfi_location_code": "4054",
-      "arrival_time": "13:28:00",
-      "departure_time": "13:30:00"
+      "arrival_time": "17:28:00",
+      "departure_time": "17:30:00"
     },
     {
       "stop_sequence": 7,
       "stop_name": "Milano Rogoredo",
       "location_code": "RG_",
       "rfi_location_code": "1720",
-      "arrival_time": "14:09:00",
-      "departure_time": "14:11:00"
+      "arrival_time": "18:09:00",
+      "departure_time": "18:11:00"
     },
     {
       "stop_sequence": 8,
       "stop_name": "Milano Centrale",
       "location_code": "MC_",
       "rfi_location_code": "1728",
-      "arrival_time": "14:20:00",
-      "departure_time": "14:30:00"
+      "arrival_time": "18:20:00",
+      "departure_time": "18:30:00"
     },
     {
       "stop_sequence": 9,
       "stop_name": "Torino Porta di Susa",
       "location_code": "OUE",
       "rfi_location_code": "3163",
-      "arrival_time": "15:20:00",
-      "departure_time": "15:22:00"
+      "arrival_time": "19:19:00",
+      "departure_time": "19:21:00"
     },
     {
       "stop_sequence": 10,
       "stop_name": "Torino Porta Nuova",
       "location_code": "TOP",
       "rfi_location_code": "2876",
-      "arrival_time": "15:36:00",
+      "arrival_time": "19:36:00",
       "departure_time": null
     }
   ]

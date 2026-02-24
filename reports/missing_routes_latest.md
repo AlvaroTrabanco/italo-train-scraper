@@ -17,16 +17,16 @@
 | Reggio Calabria | Torino Porta Nuova | MISSING_ROUTE | 8134 |  | 8134 |  |
 | Roma Termini | Bari Centrale | MISSING_ROUTE | 8141 |  | 8141 |  |
 | Roma Termini | Reggio Calabria | MISSING_ROUTE | 8191 |  | 8191 |  |
-| Salerno | Milano Centrale | MISSING_ROUTE | 9950, 9954, 9962 |  | 9950, 9954, 9962 |  |
+| Torino Porta Nuova | Bari Centrale | MISSING_ROUTE | 9939 |  | 9939 |  |
 | Torino Porta Nuova | Reggio Calabria | MISSING_ROUTE | 6143 |  | 6143 |  |
 | Bolzano | Roma Termini | PARTIAL_MISSING | 8953, 8963 | 8953 | 8963 |  |
 | Milano Centrale | Napoli | PARTIAL_MISSING | 9967, 9975, 9981, 9987, 9989, 9995 | 9967, 9987, 9989, 9995 | 9975, 9981 |  |
 | Milano Centrale | Roma Termini | PARTIAL_MISSING | 9961, 9969, 9979, 9983, 9985, 9993, 9997 | 9961, 9969, 9979, 9983, 9985, 9993 | 9997 |  |
 | Milano Centrale | Venezia Santa Lucia | PARTIAL_MISSING | 8973, 8977, 8981, 8983, 8987, 8989, 8995, 8997 | 8973, 8977, 8981, 8983, 8987, 8995, 8997 | 8989 |  |
-| Napoli | Milano Centrale | PARTIAL_MISSING | 9932, 9948, 9970, 9974, 9980, 9982, 9996 | 9948, 9970, 9974, 9982, 9996 | 9932, 9980 |  |
-| Napoli | Torino Porta Nuova | PARTIAL_MISSING | 9908, 9912, 9924, 9940, 9946, 9994 | 9908, 9912, 9924, 9994 | 9940, 9946 |  |
+| Napoli | Milano Centrale | PARTIAL_MISSING | 9932, 9948, 9970, 9974, 9980, 9982, 9996 | 9932, 9948, 9970, 9974, 9982, 9996 | 9980 |  |
 | Napoli | Venezia Santa Lucia | PARTIAL_MISSING | 8904, 8908, 8922 | 8904, 8908 | 8922 |  |
 | Roma Termini | Milano Centrale | PARTIAL_MISSING | 9944, 9976, 9978, 9984, 9986, 9990 | 9978, 9980, 9984, 9986, 9990 | 9944, 9976 | 9980 |
+| Salerno | Milano Centrale | PARTIAL_MISSING | 9950, 9954, 9962 | 9950 | 9954, 9962 |  |
 | Torino Porta Nuova | Napoli | PARTIAL_MISSING | 9919, 9927, 9935, 9955, 9959 | 9919, 9935, 9955 | 9927, 9959 |  |
 | Torino Porta Nuova | Roma Termini | PARTIAL_MISSING | 9923, 9963 | 9923 | 9963 |  |
 | Torino Porta Nuova | Salerno | PARTIAL_MISSING | 9947, 9951, 9971 | 9947, 9951 | 9971 |  |
@@ -40,6 +40,7 @@
 | Milano Centrale | Udine | OK | 8993 | 8993 |  |  |
 | Napoli | Brescia | OK | 8956 | 8956 |  |  |
 | Napoli | Genova Brignole | OK | 9992 | 9992 |  |  |
+| Napoli | Torino Porta Nuova | OK | 9908, 9912, 9924, 9940, 9946, 9994 | 9908, 9912, 9924, 9940, 9946, 9994 |  |  |
 | Napoli | Trieste C.le | OK | 8918 | 8918 |  |  |
 | Roma Termini | Bolzano | OK | 8966 | 8966 |  |  |
 | Roma Termini | Brescia | OK | 8960 | 8960, 9944 |  | 9944 |
@@ -48,7 +49,6 @@
 | Roma Termini | Venezia Santa Lucia | OK | 8900, 8906, 8914, 8916, 8924, 8928 | 8900, 8906, 8914, 8916, 8924, 8928 |  |  |
 | Salerno | Torino Porta Nuova | OK | 9916, 9920 | 9916, 9920 |  |  |
 | Salerno | Venezia Santa Lucia | OK | 8910 | 8910 |  |  |
-| Torino Porta Nuova | Bari Centrale | OK | 9939 | 9939 |  |  |
 | Udine | Milano Centrale | OK | 8971 | 8971 |  |  |
 | Udine | Napoli | OK | 8907 | 8907 |  |  |
 | Venezia Santa Lucia | Napoli | OK | 8903, 8923, 8925, 8929 | 8903, 8923, 8925, 8929 |  |  |

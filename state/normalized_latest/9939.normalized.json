@@ -1,11 +1,11 @@
 {
   "train_number": "9939",
-  "last_update": "22:01",
-  "captured_utc": "20260223T210603Z",
+  "last_update": "14:34",
+  "captured_utc": "20260224T133857Z",
   "origin_station": "Torino Porta Nuova",
-  "destination_station": "Bari Centrale",
+  "destination_station": "Foggia",
   "origin_code": "TOP",
-  "destination_code": "BAC",
+  "destination_code": "FG_",
   "stops": [
     {
       "stop_sequence": 0,
@@ -13,23 +13,23 @@
       "location_code": "TOP",
       "rfi_location_code": "2876",
       "arrival_time": null,
-      "departure_time": "12:20:00"
+      "departure_time": "12:15:00"
     },
     {
       "stop_sequence": 1,
       "stop_name": "Torino Porta di Susa",
       "location_code": "OUE",
       "rfi_location_code": "3163",
-      "arrival_time": "12:28:00",
-      "departure_time": "12:30:00"
+      "arrival_time": "12:23:00",
+      "departure_time": "12:25:00"
     },
     {
       "stop_sequence": 2,
       "stop_name": "Milano Expo Rho",
       "location_code": "RRO",
       "rfi_location_code": "3098",
-      "arrival_time": "13:14:00",
-      "departure_time": "13:16:00"
+      "arrival_time": "13:10:00",
+      "departure_time": "13:12:00"
     },
     {
       "stop_sequence": 3,
@@ -109,46 +109,6 @@
       "location_code": "FG_",
       "rfi_location_code": "1334",
       "arrival_time": "20:45:00",
-      "departure_time": "20:54:00"
-    },
-    {
-      "stop_sequence": 13,
-      "stop_name": "Barletta",
-      "location_code": "BLT",
-      "rfi_location_code": "598",
-      "arrival_time": "21:26:00",
-      "departure_time": "21:28:00"
-    },
-    {
-      "stop_sequence": 14,
-      "stop_name": "Trani",
-      "location_code": "TR_",
-      "rfi_location_code": "2902",
-      "arrival_time": "21:35:00",
-      "departure_time": "21:37:00"
-    },
-    {
-      "stop_sequence": 15,
-      "stop_name": "Bisceglie",
-      "location_code": "BIG",
-      "rfi_location_code": "652",
-      "arrival_time": "21:43:00",
-      "departure_time": "21:45:00"
-    },
-    {
-      "stop_sequence": 16,
-      "stop_name": "Molfetta",
-      "location_code": "ML_",
-      "rfi_location_code": "652",
-      "arrival_time": "21:51:00",
-      "departure_time": "21:53:00"
-    },
-    {
-      "stop_sequence": 17,
-      "stop_name": "Bari Centrale",
-      "location_code": "BAC",
-      "rfi_location_code": "995",
-      "arrival_time": "22:10:00",
       "departure_time": null
     }
   ]

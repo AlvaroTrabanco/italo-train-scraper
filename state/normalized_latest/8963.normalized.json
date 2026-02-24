@@ -1,0 +1,83 @@
+{
+  "train_number": "8963",
+  "last_update": "14:34",
+  "captured_utc": "20260224T133857Z",
+  "origin_station": "Bolzano",
+  "destination_station": "Napoli",
+  "origin_code": "BLZ",
+  "destination_code": "NAC",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Bolzano",
+      "location_code": "BLZ",
+      "rfi_location_code": "685",
+      "arrival_time": null,
+      "departure_time": "14:42:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Trento",
+      "location_code": "TCN",
+      "rfi_location_code": "2912",
+      "arrival_time": "15:12:00",
+      "departure_time": "15:14:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Rovereto",
+      "location_code": "RVR",
+      "rfi_location_code": "2440",
+      "arrival_time": "15:26:00",
+      "departure_time": "15:28:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Verona Porta Nuova",
+      "location_code": "VPN",
+      "rfi_location_code": "3025",
+      "arrival_time": "16:10:00",
+      "departure_time": "16:20:00"
+    },
+    {
+      "stop_sequence": 4,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "17:14:00",
+      "departure_time": "17:17:00"
+    },
+    {
+      "stop_sequence": 5,
+      "stop_name": "Firenze Santa Maria Novella",
+      "location_code": "SMN",
+      "rfi_location_code": "1325",
+      "arrival_time": "17:54:00",
+      "departure_time": "18:03:00"
+    },
+    {
+      "stop_sequence": 6,
+      "stop_name": "Roma Tiburtina",
+      "location_code": "RTB",
+      "rfi_location_code": "2385",
+      "arrival_time": "19:29:00",
+      "departure_time": "19:43:00"
+    },
+    {
+      "stop_sequence": 7,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "19:55:00",
+      "departure_time": "20:06:00"
+    },
+    {
+      "stop_sequence": 8,
+      "stop_name": "Napoli",
+      "location_code": "NAC",
+      "rfi_location_code": "1888",
+      "arrival_time": "21:33:00",
+      "departure_time": null
+    }
+  ]
+}

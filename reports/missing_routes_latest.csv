@@ -1,5 +1,5 @@
 departure,arrival,status,expected_trains,found_trains,missing_expected_trains,extra_gtfs_trains,gtfs_route_long_names
-Torino Porta Nuova,Bari Centrale,OK,9939,9939,,,Torino Porta Nuova – Bari Centrale
+Torino Porta Nuova,Bari Centrale,MISSING_ROUTE,9939,,9939,,
 Bari Centrale,Torino Porta Nuova,MISSING_ROUTE,"8140, 9928",,"8140, 9928",,
 Roma Termini,Bari Centrale,MISSING_ROUTE,8141,,8141,,
 Bolzano,Roma Termini,PARTIAL_MISSING,"8953, 8963",8953,8963,,Bolzano – Roma Termini
@@ -31,16 +31,16 @@ Salerno,Torino Porta Nuova,OK,"9916, 9920","9916, 9920",,,Salerno – Torino Por
 Torino Porta Nuova,Roma Termini,PARTIAL_MISSING,"9923, 9963",9923,9963,,Torino Porta Nuova – Roma Termini
 Roma Termini,Torino Porta Nuova,OK,9904,9904,,,Roma Termini – Torino Porta Nuova
 Torino Porta Nuova,Napoli,PARTIAL_MISSING,"9919, 9927, 9935, 9955, 9959","9919, 9935, 9955","9927, 9959",,Torino Porta Nuova – Napoli
-Napoli,Torino Porta Nuova,PARTIAL_MISSING,"9908, 9912, 9924, 9940, 9946, 9994","9908, 9912, 9924, 9994","9940, 9946",,Napoli – Torino Porta Nuova
+Napoli,Torino Porta Nuova,OK,"9908, 9912, 9924, 9940, 9946, 9994","9908, 9912, 9924, 9940, 9946, 9994",,,Napoli – Torino Porta Nuova
 Milano Centrale,Torino Porta Nuova,OK,9900,9900,,,Milano Centrale – Torino Porta Nuova
 Napoli,Brescia,OK,8956,8956,,,Napoli – Brescia
 Brescia,Napoli,MISSING_ROUTE,8967,,8967,,
 Roma Termini,Brescia,OK,8960,"8960, 9944",,9944,Roma Termini – Brescia
 Brescia,Roma Termini,OK,"8959, 9941","8959, 8967, 9941",,8967,Brescia – Roma Termini
 Milano Centrale,Salerno,MISSING_ROUTE,"9931, 9977, 9991",,"9931, 9977, 9991",,
-Salerno,Milano Centrale,MISSING_ROUTE,"9950, 9954, 9962",,"9950, 9954, 9962",,
+Salerno,Milano Centrale,PARTIAL_MISSING,"9950, 9954, 9962",9950,"9954, 9962",,Salerno – Milano Centrale
 Milano Centrale,Napoli,PARTIAL_MISSING,"9967, 9975, 9981, 9987, 9989, 9995","9967, 9987, 9989, 9995","9975, 9981",,Milano Centrale – Napoli
-Napoli,Milano Centrale,PARTIAL_MISSING,"9932, 9948, 9970, 9974, 9980, 9982, 9996","9948, 9970, 9974, 9982, 9996","9932, 9980",,Napoli – Milano Centrale
+Napoli,Milano Centrale,PARTIAL_MISSING,"9932, 9948, 9970, 9974, 9980, 9982, 9996","9932, 9948, 9970, 9974, 9982, 9996",9980,,Napoli – Milano Centrale
 Milano Centrale,Roma Termini,PARTIAL_MISSING,"9961, 9969, 9979, 9983, 9985, 9993, 9997","9961, 9969, 9979, 9983, 9985, 9993",9997,,Milano Centrale – Roma Termini
 Roma Termini,Milano Centrale,PARTIAL_MISSING,"9944, 9976, 9978, 9984, 9986, 9990","9978, 9980, 9984, 9986, 9990","9944, 9976",9980,Roma Termini – Milano Centrale
 Caserta,Milano Centrale,OK,9972,9972,,,Caserta – Milano Centrale

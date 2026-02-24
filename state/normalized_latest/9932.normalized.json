@@ -1,0 +1,75 @@
+{
+  "train_number": "9932",
+  "last_update": "14:37",
+  "captured_utc": "20260224T133857Z",
+  "origin_station": "Napoli",
+  "destination_station": "Milano Centrale",
+  "origin_code": "NAC",
+  "destination_code": "MC_",
+  "stops": [
+    {
+      "stop_sequence": 0,
+      "stop_name": "Napoli",
+      "location_code": "NAC",
+      "rfi_location_code": "1888",
+      "arrival_time": null,
+      "departure_time": "11:20:00"
+    },
+    {
+      "stop_sequence": 1,
+      "stop_name": "Napoli Afragola",
+      "location_code": "NAF",
+      "rfi_location_code": "4020",
+      "arrival_time": "11:33:00",
+      "departure_time": "11:35:00"
+    },
+    {
+      "stop_sequence": 2,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "12:30:00",
+      "departure_time": "12:40:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Firenze Santa Maria Novella",
+      "location_code": "SMN",
+      "rfi_location_code": "1325",
+      "arrival_time": "14:17:00",
+      "departure_time": "14:25:00"
+    },
+    {
+      "stop_sequence": 4,
+      "stop_name": "Bologna centrale",
+      "location_code": "BO2",
+      "rfi_location_code": "942",
+      "arrival_time": "15:03:00",
+      "departure_time": "15:06:00"
+    },
+    {
+      "stop_sequence": 5,
+      "stop_name": "Mediopadana R.Emilia",
+      "location_code": "AAV",
+      "rfi_location_code": "4054",
+      "arrival_time": "15:28:00",
+      "departure_time": "15:30:00"
+    },
+    {
+      "stop_sequence": 6,
+      "stop_name": "Milano Rogoredo",
+      "location_code": "RG_",
+      "rfi_location_code": "1720",
+      "arrival_time": "16:09:00",
+      "departure_time": "16:11:00"
+    },
+    {
+      "stop_sequence": 7,
+      "stop_name": "Milano Centrale",
+      "location_code": "MC_",
+      "rfi_location_code": "1728",
+      "arrival_time": "16:20:00",
+      "departure_time": null
+    }
+  ]
+}
