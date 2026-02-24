@@ -1,13 +1,14 @@
 # Missing routes report
 
 - Expected pairs: **46**
-- Missing routes (no A→B in GTFS): **10**
-- Partial routes (some trains missing): **14**
+- Missing routes (no A→B in GTFS): **11**
+- Partial routes (some trains missing): **13**
 
 ## Coverage by route (exact train numbers)
 
 | departure | arrival | status | expected | found | missing (expected) | extra (GTFS) |
 |---|---|---|---|---|---|---|
+| Bari Centrale | Torino Porta Nuova | MISSING_ROUTE | 8140, 9928 |  | 8140, 9928 |  |
 | Brescia | Napoli | MISSING_ROUTE | 8967 |  | 8967 |  |
 | Milano Centrale | Salerno | MISSING_ROUTE | 9931, 9977, 9991 |  | 9931, 9977, 9991 |  |
 | Napoli | Udine | MISSING_ROUTE | 8920 |  | 8920 |  |
@@ -18,14 +19,13 @@
 | Roma Termini | Reggio Calabria | MISSING_ROUTE | 8191 |  | 8191 |  |
 | Salerno | Milano Centrale | MISSING_ROUTE | 9950, 9954, 9962 |  | 9950, 9954, 9962 |  |
 | Torino Porta Nuova | Reggio Calabria | MISSING_ROUTE | 6143 |  | 6143 |  |
-| Bari Centrale | Torino Porta Nuova | PARTIAL_MISSING | 8140, 9928 | 9928 | 8140 |  |
 | Bolzano | Roma Termini | PARTIAL_MISSING | 8953, 8963 | 8953 | 8963 |  |
 | Milano Centrale | Napoli | PARTIAL_MISSING | 9967, 9975, 9981, 9987, 9989, 9995 | 9967, 9987, 9989, 9995 | 9975, 9981 |  |
 | Milano Centrale | Roma Termini | PARTIAL_MISSING | 9961, 9969, 9979, 9983, 9985, 9993, 9997 | 9961, 9969, 9979, 9983, 9985, 9993 | 9997 |  |
 | Milano Centrale | Venezia Santa Lucia | PARTIAL_MISSING | 8973, 8977, 8981, 8983, 8987, 8989, 8995, 8997 | 8973, 8977, 8981, 8983, 8987, 8995, 8997 | 8989 |  |
 | Napoli | Milano Centrale | PARTIAL_MISSING | 9932, 9948, 9970, 9974, 9980, 9982, 9996 | 9948, 9970, 9974, 9982, 9996 | 9932, 9980 |  |
-| Napoli | Torino Porta Nuova | PARTIAL_MISSING | 9908, 9912, 9924, 9940, 9946, 9994 | 9908, 9912, 9994 | 9924, 9940, 9946 |  |
-| Napoli | Venezia Santa Lucia | PARTIAL_MISSING | 8904, 8908, 8922 | 8904 | 8908, 8922 |  |
+| Napoli | Torino Porta Nuova | PARTIAL_MISSING | 9908, 9912, 9924, 9940, 9946, 9994 | 9908, 9912, 9924, 9994 | 9940, 9946 |  |
+| Napoli | Venezia Santa Lucia | PARTIAL_MISSING | 8904, 8908, 8922 | 8904, 8908 | 8922 |  |
 | Roma Termini | Milano Centrale | PARTIAL_MISSING | 9944, 9976, 9978, 9984, 9986, 9990 | 9978, 9980, 9984, 9986, 9990 | 9944, 9976 | 9980 |
 | Torino Porta Nuova | Napoli | PARTIAL_MISSING | 9919, 9927, 9935, 9955, 9959 | 9919, 9935, 9955 | 9927, 9959 |  |
 | Torino Porta Nuova | Roma Termini | PARTIAL_MISSING | 9923, 9963 | 9923 | 9963 |  |

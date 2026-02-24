@@ -1,7 +1,7 @@
 {
   "train_number": "9923",
-  "last_update": "12:18",
-  "captured_utc": "20260223T111947Z",
+  "last_update": "10:07",
+  "captured_utc": "20260224T091015Z",
   "origin_station": "Torino Porta Nuova",
   "destination_station": "Roma Termini",
   "origin_code": "TOP",
@@ -13,15 +13,15 @@
       "location_code": "TOP",
       "rfi_location_code": "2876",
       "arrival_time": null,
-      "departure_time": "08:30:00"
+      "departure_time": "08:20:00"
     },
     {
       "stop_sequence": 1,
       "stop_name": "Torino Porta di Susa",
       "location_code": "OUE",
       "rfi_location_code": "3163",
-      "arrival_time": "08:38:00",
-      "departure_time": "08:40:00"
+      "arrival_time": "08:28:00",
+      "departure_time": "08:30:00"
     },
     {
       "stop_sequence": 2,
