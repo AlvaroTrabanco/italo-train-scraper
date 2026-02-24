@@ -36,7 +36,7 @@
 | Torino Porta Nuova | Napoli | PARTIAL_MISSING | 9919, 9927, 9935, 9955, 9959 | 9919, 9935, 9955 | 9927, 9959 | 9927, 9959 |  |  |
 | Napoli | Torino Porta Nuova | OK | 9908, 9912, 9924, 9940, 9946, 9994 | 9908, 9912, 9924, 9940, 9946, 9994 |  |  |  |  |
 | Milano Centrale | Torino Porta Nuova | OK | 9900 | 9900 |  |  |  |  |
-| Napoli | Brescia | OK | 8956 | 8956 |  |  |  |  |
+| Napoli | Brescia | OK | 8956 | 8956, 8968 |  |  |  | 8968 |
 | Brescia | Napoli | MISSING_ROUTE | 8967 |  |  | 8967 | 8967 (Brescia – Roma Termini) |  |
 | Roma Termini | Brescia | OK | 8960 | 8960, 9944 |  |  |  | 9944 |
 | Brescia | Roma Termini | OK | 8959, 9941 | 8959, 8967, 9941 |  |  |  | 8967 |
@@ -44,7 +44,7 @@
 | Salerno | Milano Centrale | PARTIAL_MISSING | 9950, 9954, 9962 | 9950 | 9954, 9962 | 9954, 9962 |  |  |
 | Milano Centrale | Napoli | PARTIAL_MISSING | 9967, 9975, 9981, 9987, 9989, 9995 | 9967, 9987, 9989, 9995 | 9975, 9981 | 9975, 9981 |  |  |
 | Napoli | Milano Centrale | PARTIAL_MISSING | 9932, 9948, 9970, 9974, 9980, 9982, 9996 | 9932, 9948, 9970, 9974, 9982, 9996 |  | 9980 | 9980 (Roma Termini – Milano Centrale) |  |
-| Milano Centrale | Roma Termini | PARTIAL_MISSING | 9961, 9969, 9979, 9983, 9985, 9993, 9997 | 9961, 9969, 9979, 9983, 9985, 9993 | 9997 | 9997 |  |  |
+| Milano Centrale | Roma Termini | OK | 9961, 9969, 9979, 9983, 9985, 9993, 9997 | 9961, 9969, 9979, 9983, 9985, 9993, 9997 |  |  |  |  |
 | Roma Termini | Milano Centrale | PARTIAL_MISSING | 9944, 9976, 9978, 9984, 9986, 9990 | 9978, 9980, 9984, 9986, 9990 | 9976 | 9944, 9976 | 9944 (Roma Termini – Brescia) | 9980 |
 | Caserta | Milano Centrale | OK | 9972 | 9972 |  |  |  |  |
 | Roma Termini | Napoli | OK | 9903 | 9903 |  |  |  |  |
