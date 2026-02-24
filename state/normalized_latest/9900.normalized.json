@@ -1,7 +1,7 @@
 {
   "train_number": "9900",
-  "last_update": "08:20",
-  "captured_utc": "20260223T072316Z",
+  "last_update": "07:38",
+  "captured_utc": "20260224T064048Z",
   "origin_station": "Milano Centrale",
   "destination_station": "Torino Porta Nuova",
   "origin_code": "MC_",
@@ -28,7 +28,7 @@
       "stop_name": "Torino Porta Nuova",
       "location_code": "TOP",
       "rfi_location_code": "2876",
-      "arrival_time": "08:30:00",
+      "arrival_time": "08:36:00",
       "departure_time": null
     }
   ]
