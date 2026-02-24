@@ -28,7 +28,7 @@
 | Venezia Santa Lucia | Salerno | OK | 8913, 8919 | 8913, 8919 |  |  |  |  |
 | Salerno | Venezia Santa Lucia | OK | 8910 | 8910 |  |  |  |  |
 | Venezia Santa Lucia | Napoli | OK | 8903, 8923, 8925, 8929 | 8903, 8923, 8925, 8929 |  |  |  |  |
-| Napoli | Venezia Santa Lucia | PARTIAL_MISSING | 8904, 8908, 8922 | 8904, 8908 | 8922 | 8922 |  |  |
+| Napoli | Venezia Santa Lucia | OK | 8904, 8908, 8922 | 8904, 8908, 8922 |  |  |  |  |
 | Torino Porta Nuova | Salerno | PARTIAL_MISSING | 9947, 9951, 9971 | 9947, 9951 |  | 9971 | 9971 (Torino Porta Nuova – Milano Centrale) |  |
 | Salerno | Torino Porta Nuova | OK | 9916, 9920 | 9916, 9920 |  |  |  |  |
 | Torino Porta Nuova | Roma Termini | PARTIAL_MISSING | 9923, 9963 | 9923 | 9963 | 9963 |  |  |
