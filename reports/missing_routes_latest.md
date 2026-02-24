@@ -43,7 +43,7 @@
 | Venezia Santa Lucia | Napoli | 8903, 8923, 8925, 8929 | 8923, 8929, 8925, 8903 |
 | Napoli | Venezia Santa Lucia | 8904 | 8908, 8904, 8922 |
 | Torino Porta Nuova | Salerno | 9947, 9951 | 9951, 9971, 9947 |
-| Salerno | Torino Porta Nuova | 9916 | 9920, 9916 |
+| Salerno | Torino Porta Nuova | 9916, 9920 | 9920, 9916 |
 | Torino Porta Nuova | Roma Termini | 9923 | 9963, 9923 |
 | Roma Termini | Torino Porta Nuova | 9904 | 9904 |
 | Torino Porta Nuova | Napoli | 9919, 9935, 9955 | 9919, 9927, 9959, 9955, 9935 |
