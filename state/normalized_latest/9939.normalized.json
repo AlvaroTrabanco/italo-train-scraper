@@ -1,7 +1,7 @@
 {
   "train_number": "9939",
-  "last_update": "15:28",
-  "captured_utc": "20260224T143345Z",
+  "last_update": "15:51",
+  "captured_utc": "20260224T145557Z",
   "origin_station": "Torino Porta Nuova",
   "destination_station": "Foggia",
   "origin_code": "TOP",
@@ -97,6 +97,14 @@
     },
     {
       "stop_sequence": 11,
+      "stop_name": null,
+      "location_code": "MCA",
+      "rfi_location_code": null,
+      "arrival_time": "19:53:00",
+      "departure_time": "19:57:00"
+    },
+    {
+      "stop_sequence": 12,
       "stop_name": "Foggia",
       "location_code": "FG_",
       "rfi_location_code": "1334",
