@@ -5,7 +5,7 @@ import json
 import os
 import zipfile
 from typing import Dict, Any, List, Tuple, Set
-
+from datetime import datetime, timedelta, timezone
 
 def load_coords_csv(path: str) -> Dict[str, Tuple[str, str]]:
     coords: Dict[str, Tuple[str, str]] = {}
@@ -76,6 +76,11 @@ def main() -> None:
     service_id = f"SVC_{args.service_date}"
     agency_id = args.agency_id
 
+    # Service window: start at --service-date and run for 1 year (inclusive)
+    start_date = args.service_date  # still start service on the service-date
+    today_utc = datetime.now(timezone.utc).date()
+    end_date = (today_utc + timedelta(days=365)).strftime("%Y%m%d")
+
     norm_files = [f for f in os.listdir(args.normalized_dir) if f.endswith(".normalized.json")]
     if not norm_files:
         raise SystemExit("No normalized files found")
@@ -99,8 +104,9 @@ def main() -> None:
         [agency_id, args.agency_name, "https://www.italotreno.com/", "Europe/Rome"],
     ]
 
-    # calendar_dates: all trips valid on one service date
-    cal_dates_rows = [[service_id, args.service_date, "1"]]
+    # calendar: trips valid every day for 1 year starting at --service-date
+    # monday..sunday = 1 means runs daily
+    calendar_rows = [[service_id, "1", "1", "1", "1", "1", "1", "1", start_date, end_date]]
 
     def stop_key(code: str, name: str) -> str:
         code = (code or "").strip()
@@ -233,9 +239,14 @@ def main() -> None:
         stop_times_rows,
     )
     write_csv(
-        os.path.join(tmp, "calendar_dates.txt"),
-        ["service_id", "date", "exception_type"],
-        cal_dates_rows,
+        os.path.join(tmp, "calendar.txt"),
+        ["service_id", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "start_date", "end_date"],
+        calendar_rows,
+    )
+    write_csv(
+        os.path.join(tmp, "feed_info.txt"),
+        ["feed_publisher_name", "feed_publisher_url", "feed_lang", "feed_start_date", "feed_end_date"],
+        [[args.agency_name, "https://www.italotreno.com/", "it", start_date, end_date]],
     )
 
     os.makedirs(os.path.dirname(args.out_zip) or ".", exist_ok=True)
@@ -246,7 +257,8 @@ def main() -> None:
             "routes.txt",
             "trips.txt",
             "stop_times.txt",
-            "calendar_dates.txt",
+            "calendar.txt",
+            "feed_info.txt",
         ]:
             z.write(os.path.join(tmp, name), arcname=name)
 
