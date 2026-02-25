@@ -3,7 +3,7 @@ name: Build & Publish Italo GTFS + Stop Report
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12 */4 * * *"  # every 4 hours at :12 UTC
+    - cron: "12 */1 * * *"  # every 1 hours at :12 UTC
   push:
     branches: [ "main" ]
     paths:
