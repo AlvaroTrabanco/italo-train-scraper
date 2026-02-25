@@ -165,8 +165,8 @@ jobs:
             --out-zip "gtfs/italo_$SERVICE_DATE.zip"
 
           # Stable + dated copies to Pages
-          cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_latest.zip"
-          cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_$SERVICE_DATE.zip"
+          # cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_latest.zip"
+          # cp "gtfs/italo_$SERVICE_DATE.zip" "public/gtfs/italo_$SERVICE_DATE.zip"
 
           # Persist cumulative normalized_latest to Pages state
           cp -f normalized_latest/*.normalized.json public/state/normalized_latest/ 2>/dev/null || true
@@ -193,6 +193,14 @@ jobs:
           else
             echo "No index.html found (expected public/index.html in repo)."
           fi
+
+      - name: Upload GTFS artifact (private)
+        if: env.SKIP_RUN != '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: italo_gtfs_${{ steps.vars.outputs.SERVICE_DATE }}
+          path: gtfs/italo_${{ steps.vars.outputs.SERVICE_DATE }}.zip
+          retention-days: 30
 
       - name: Expected routes vs GTFS (missing routes report)
         if: env.SKIP_RUN != '1'
