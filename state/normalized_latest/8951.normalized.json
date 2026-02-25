@@ -1,66 +1,66 @@
 {
-  "train_number": "8953",
+  "train_number": "8951",
   "last_update": "07:03",
   "captured_utc": "20260225T063409Z",
-  "origin_station": "Bolzano",
+  "origin_station": "Brescia",
   "destination_station": "Roma Termini",
-  "origin_code": "BLZ",
+  "origin_code": "BSC",
   "destination_code": "RMT",
   "stops": [
     {
       "stop_sequence": 0,
-      "stop_name": "Bolzano",
-      "location_code": "BLZ",
-      "rfi_location_code": "685",
+      "stop_name": "Brescia",
+      "location_code": "BSC",
+      "rfi_location_code": "734",
       "arrival_time": null,
-      "departure_time": "06:42:00"
+      "departure_time": "06:27:00"
     },
     {
       "stop_sequence": 1,
-      "stop_name": "Trento",
-      "location_code": "TCN",
-      "rfi_location_code": "2912",
-      "arrival_time": "07:11:00",
-      "departure_time": "07:13:00"
+      "stop_name": "Desenzano",
+      "location_code": "DSG",
+      "rfi_location_code": "1229",
+      "arrival_time": "06:41:00",
+      "departure_time": "06:43:00"
     },
     {
       "stop_sequence": 2,
-      "stop_name": "Rovereto",
-      "location_code": "RVR",
-      "rfi_location_code": "2440",
-      "arrival_time": "07:25:00",
-      "departure_time": "07:27:00"
+      "stop_name": "Peschiera",
+      "location_code": "PSY",
+      "rfi_location_code": "2099",
+      "arrival_time": "06:50:00",
+      "departure_time": "06:52:00"
     },
     {
       "stop_sequence": 3,
       "stop_name": "Verona Porta Nuova",
       "location_code": "VPN",
       "rfi_location_code": "3025",
-      "arrival_time": "08:10:00",
-      "departure_time": "08:22:00"
+      "arrival_time": "07:11:00",
+      "departure_time": "07:22:00"
     },
     {
       "stop_sequence": 4,
       "stop_name": "Bologna centrale",
       "location_code": "BO2",
       "rfi_location_code": "942",
-      "arrival_time": "09:14:00",
-      "departure_time": "09:17:00"
+      "arrival_time": "08:14:00",
+      "departure_time": "08:17:00"
     },
     {
       "stop_sequence": 5,
       "stop_name": "Firenze Santa Maria Novella",
       "location_code": "SMN",
       "rfi_location_code": "1325",
-      "arrival_time": "09:54:00",
-      "departure_time": "10:03:00"
+      "arrival_time": "08:54:00",
+      "departure_time": "09:03:00"
     },
     {
       "stop_sequence": 6,
       "stop_name": "Roma Termini",
       "location_code": "RMT",
       "rfi_location_code": "2416",
-      "arrival_time": "11:40:00",
+      "arrival_time": "10:40:00",
       "departure_time": null
     }
   ]

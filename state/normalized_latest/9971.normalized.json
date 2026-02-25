@@ -1,11 +1,11 @@
 {
   "train_number": "9971",
-  "last_update": "06:36",
-  "captured_utc": "20260224T053931Z",
+  "last_update": "07:32",
+  "captured_utc": "20260225T063409Z",
   "origin_station": "Torino Porta Nuova",
-  "destination_station": "Milano Centrale",
+  "destination_station": "Salerno",
   "origin_code": "TOP",
-  "destination_code": "MC_",
+  "destination_code": "SAL",
   "stops": [
     {
       "stop_sequence": 0,
@@ -29,6 +29,46 @@
       "location_code": "MC_",
       "rfi_location_code": "1728",
       "arrival_time": "06:57:00",
+      "departure_time": "07:15:00"
+    },
+    {
+      "stop_sequence": 3,
+      "stop_name": "Milano Rogoredo",
+      "location_code": "RG_",
+      "rfi_location_code": "1720",
+      "arrival_time": "07:23:00",
+      "departure_time": "07:25:00"
+    },
+    {
+      "stop_sequence": 4,
+      "stop_name": "Roma Termini",
+      "location_code": "RMT",
+      "rfi_location_code": "2416",
+      "arrival_time": "10:25:00",
+      "departure_time": "10:40:00"
+    },
+    {
+      "stop_sequence": 5,
+      "stop_name": "Napoli Afragola",
+      "location_code": "NAF",
+      "rfi_location_code": "4020",
+      "arrival_time": "11:38:00",
+      "departure_time": "11:40:00"
+    },
+    {
+      "stop_sequence": 6,
+      "stop_name": "Napoli",
+      "location_code": "NAC",
+      "rfi_location_code": "1888",
+      "arrival_time": "12:03:00",
+      "departure_time": "12:15:00"
+    },
+    {
+      "stop_sequence": 7,
+      "stop_name": "Salerno",
+      "location_code": "SAL",
+      "rfi_location_code": "2617",
+      "arrival_time": "13:02:00",
       "departure_time": null
     }
   ]
