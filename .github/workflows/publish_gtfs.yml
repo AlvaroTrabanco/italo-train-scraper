@@ -372,11 +372,12 @@ jobs:
           </html>
           EOF
       
-      - name: Deploy to Netlify (action)
-        uses: nwtgck/actions-netlify@v1.1.3
-        with:
-          publish-dir: ./public
-          production-deploy: true
-          enable-rename: false
-          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          site-id: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Deploy to Netlify (production)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          netlify deploy --dir=public --prod --message "Italo GTFS: $RUN_UTC / $SERVICE_DATE"
