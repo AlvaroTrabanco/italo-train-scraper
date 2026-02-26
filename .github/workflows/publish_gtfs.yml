@@ -372,10 +372,11 @@ jobs:
             </style>
           </head>
           <body>
-
-            <input type="password" id="key" placeholder="Enter download key">
-            <button onclick="download()">Download GTFS</button>
-
+            <div class="card">
+              <h2>Route Coverage Reports</h2>
+              <input type="password" id="key" placeholder="Enter download key">
+              <button onclick="download()">Download GTFS</button>
+            </div>
             <script>
             function download() {
               const key = document.getElementById("key").value;
