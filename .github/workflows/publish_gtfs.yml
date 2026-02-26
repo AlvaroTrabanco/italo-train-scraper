@@ -361,12 +361,21 @@ jobs:
           </head>
           <body>
 
-            <div class="card">
-              <h2>Downloads</h2>
-              <ul>
-                <li><a href="/.netlify/functions/download-gtfs">Download GTFS (latest)</a></li>
-              </ul>
-            </div>
+            <input type="password" id="key" placeholder="Enter download key">
+            <button onclick="download()">Download GTFS</button>
+
+            <script>
+            function download() {
+              const key = document.getElementById("key").value;
+              if (!key) {
+                alert("Enter key");
+                return;
+              }
+              window.location.href =
+                "/.netlify/functions/download-gtfs?k=" +
+                encodeURIComponent(key);
+            }
+            </script>
 
             <div class="card">
               <h2>Route Coverage Reports</h2>

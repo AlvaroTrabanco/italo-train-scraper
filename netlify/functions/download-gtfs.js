@@ -1,87 +1,78 @@
-// netlify/functions/download-gtfs.js
+const fetch = require("node-fetch");
 
-export default async (req, context) => {
-  try {
-    const token = process.env.GITHUB_PAT;
-    const owner = process.env.GITHUB_OWNER;
-    const repo = process.env.GITHUB_REPO;
+exports.handler = async function(event) {
+  const providedKey = event.queryStringParameters?.k;
+  const expectedKey = process.env.GTFS_DL_KEY;
 
-    if (!token || !owner || !repo) {
-      return new Response("Server not configured (missing env vars).", { status: 500 });
-    }
-
-    const ghHeaders = {
-      "Authorization": `Bearer ${token}`,
-      "Accept": "application/vnd.github+json",
-      "User-Agent": "netlify-download-gtfs",
-      "X-GitHub-Api-Version": "2022-11-28",
+  if (!expectedKey) {
+    return {
+      statusCode: 500,
+      body: "Server misconfiguration: GTFS_DL_KEY not set"
     };
+  }
 
-    // 1) List recent artifacts (repo-wide)
-    const listUrl = `https://api.github.com/repos/${owner}/${repo}/actions/artifacts?per_page=100`;
-    const listRes = await fetch(listUrl, { headers: ghHeaders });
+  if (!providedKey || providedKey !== expectedKey) {
+    return {
+      statusCode: 403,
+      body: "Forbidden"
+    };
+  }
 
-    if (!listRes.ok) {
-      const txt = await listRes.text();
-      return new Response(`GitHub list artifacts failed: ${listRes.status} ${txt}`, { status: 502 });
+  const githubToken = process.env.GITHUB_PAT;
+  if (!githubToken) {
+    return {
+      statusCode: 500,
+      body: "Server misconfiguration: GITHUB_PAT not set"
+    };
+  }
+
+  try {
+    // Get latest artifact from your repo
+    const repoOwner = "AlvaroTrabanco";
+    const repoName = "italo-train-scraper";
+
+    const artifactsRes = await fetch(
+      `https://api.github.com/repos/${repoOwner}/${repoName}/actions/artifacts`,
+      {
+        headers: {
+          Authorization: `Bearer ${githubToken}`,
+          Accept: "application/vnd.github+json"
+        }
+      }
+    );
+
+    const artifacts = await artifactsRes.json();
+    const latest = artifacts.artifacts
+      .filter(a => a.name.startsWith("italo_gtfs_"))
+      .sort((a,b) => b.created_at.localeCompare(a.created_at))[0];
+
+    if (!latest) {
+      return { statusCode: 404, body: "No GTFS artifact found" };
     }
 
-    const listJson = await listRes.json();
-    const artifacts = Array.isArray(listJson.artifacts) ? listJson.artifacts : [];
-
-    // Pick most recent matching artifact name
-    const candidates = artifacts
-      .filter(a =>
-        a &&
-        a.name &&
-        a.name.startsWith("italo_gtfs_") &&
-        a.expired === false &&
-        a.archive_download_url
-      )
-      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-
-    if (candidates.length === 0) {
-      return new Response("No non-expired GTFS artifact found.", { status: 404 });
-    }
-
-    const latest = candidates[0];
-
-    // 2) Request the artifact archive download URL.
-    // GitHub replies with a 302 to a signed URL.
-    const dlRes = await fetch(latest.archive_download_url, {
-      headers: ghHeaders,
-      redirect: "manual",
+    const zipRes = await fetch(latest.archive_download_url, {
+      headers: {
+        Authorization: `Bearer ${githubToken}`,
+        Accept: "application/vnd.github+json"
+      }
     });
 
-    const location = dlRes.headers.get("location");
-    if (!(dlRes.status === 302 || dlRes.status === 301) || !location) {
-      const txt = await dlRes.text().catch(() => "");
-      return new Response(
-        `GitHub artifact download did not redirect as expected: ${dlRes.status} ${txt}`,
-        { status: 502 }
-      );
-    }
+    const buffer = await zipRes.buffer();
 
-    // 3) Fetch the signed URL (no auth needed here typically)
-    const signedRes = await fetch(location);
-
-    if (!signedRes.ok || !signedRes.body) {
-      const txt = await signedRes.text().catch(() => "");
-      return new Response(`Signed download failed: ${signedRes.status} ${txt}`, { status: 502 });
-    }
-
-    // 4) Stream back to client
-    const filename = `${latest.name}.zip`;
-    return new Response(signedRes.body, {
-      status: 200,
+    return {
+      statusCode: 200,
       headers: {
         "Content-Type": "application/zip",
-        "Content-Disposition": `attachment; filename="${filename}"`,
-        // Optional: prevent caching if you want always-fresh
-        "Cache-Control": "no-store",
+        "Content-Disposition": "attachment; filename=italo_latest.zip"
       },
-    });
-  } catch (e) {
-    return new Response(`Server error: ${e?.message || String(e)}`, { status: 500 });
+      body: buffer.toString("base64"),
+      isBase64Encoded: true
+    };
+
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: "Download failed: " + err.message
+    };
   }
 };
