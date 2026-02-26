@@ -179,7 +179,6 @@ jobs:
             "run_utc": "$RUN_UTC",
             "service_date": "$SERVICE_DATE",
             "window_hours": $WINDOW_HOURS,
-            "latest_zip": "italo_latest.zip",
             "dated_zip": "italo_$SERVICE_DATE.zip",
             "normalized_latest_files": $NORM_COUNT,
             "gtfs_trips": $TRIPS_COUNT
@@ -363,59 +362,15 @@ jobs:
           <body>
 
             <h1>Italo GTFS Export</h1>
-            <div class="muted">
-              Auto-generated every hour. GTFS valid for one year from service date.
-            </div>
 
-            <div class="card">
-              <h2>Private GTFS download</h2>
-              <p class="muted">Enter password to download <code>italo_latest.zip</code>.</p>
-
-              <div style="display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;">
-                <input
-                  id="gtfsPw"
-                  type="password"
-                  placeholder="Password"
-                  style="padding:.6rem .7rem; border:1px solid #ddd; border-radius:8px; min-width:260px;"
-                />
-                <button
-                  id="gtfsBtn"
-                  style="padding:.6rem .9rem; border:1px solid #ddd; border-radius:8px; background:#fff; cursor:pointer;"
-                >
-                  Download
-                </button>
-                <span id="gtfsMsg" class="muted"></span>
-              </div>
-            </div>
+            <input type="password" id="key" placeholder="Enter download key">
+            <button onclick="download()">Download GTFS</button>
 
             <script>
-              const btn = document.getElementById("gtfsBtn");
-              const pw = document.getElementById("gtfsPw");
-              const msg = document.getElementById("gtfsMsg");
-
-              btn.addEventListener("click", async () => {
-                msg.textContent = "Checking…";
-                const url = `/.netlify/functions/gtfs?pw=${encodeURIComponent(pw.value)}`;
-
-                try {
-                  const r = await fetch(url);
-                  if (!r.ok) {
-                    msg.textContent = r.status === 403 ? "Wrong password" : `Error ${r.status}`;
-                    return;
-                  }
-
-                  const blob = await r.blob();
-                  const a = document.createElement("a");
-                  a.href = URL.createObjectURL(blob);
-                  a.download = "italo_latest.zip";
-                  document.body.appendChild(a);
-                  a.click();
-                  a.remove();
-                  msg.textContent = "Downloading…";
-                } catch (e) {
-                  msg.textContent = "Network error";
-                }
-              });
+            function download() {
+              const key = document.getElementById("key").value;
+              window.location.href = "/.netlify/functions/download-gtfs?key=" + encodeURIComponent(key);
+            }
             </script>
 
             <div class="card">
