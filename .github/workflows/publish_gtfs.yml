@@ -193,12 +193,24 @@ jobs:
             echo "No index.html found (expected public/index.html in repo)."
           fi
 
-      - name: Upload GTFS artifact (private)
+      - name: Prepare flat GTFS artifact (GTFS files at root)
+        if: env.SKIP_RUN != '1'
+        run: |
+          SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
+          mkdir -p gtfs_flat
+
+          # Extract the GTFS zip contents into a folder (files end up at gtfs_flat/*.txt)
+          unzip -o "gtfs/italo_${SERVICE_DATE}.zip" -d gtfs_flat
+
+          echo "Flat GTFS artifact contents:"
+          ls -la gtfs_flat
+
+      - name: Upload GTFS artifact (flat, valid GTFS zip)
         if: env.SKIP_RUN != '1'
         uses: actions/upload-artifact@v4
         with:
           name: italo_gtfs_${{ steps.vars.outputs.SERVICE_DATE }}
-          path: gtfs/italo_${{ steps.vars.outputs.SERVICE_DATE }}.zip
+          path: gtfs_flat/*
           retention-days: 30
 
       - name: Expected routes vs GTFS (missing routes report)
