@@ -368,16 +368,55 @@ jobs:
             </div>
 
             <div class="card">
-              <h2>GTFS Downloads</h2>
-              <ul>
-              <li>
-                <a href="/.netlify/functions/gtfs?key=YOUR_SECRET">italo_latest.zip (private)</a>
-              </li>
-                <li><a href="gtfs/italo_latest.zip">italo_latest.zip</a> (stable URL)</li>
-                <li><a href="gtfs/latest.json">latest.json</a> (metadata)</li>
-              </ul>
-              
+              <h2>Private GTFS download</h2>
+              <p class="muted">Enter password to download <code>italo_latest.zip</code>.</p>
+
+              <div style="display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;">
+                <input
+                  id="gtfsPw"
+                  type="password"
+                  placeholder="Password"
+                  style="padding:.6rem .7rem; border:1px solid #ddd; border-radius:8px; min-width:260px;"
+                />
+                <button
+                  id="gtfsBtn"
+                  style="padding:.6rem .9rem; border:1px solid #ddd; border-radius:8px; background:#fff; cursor:pointer;"
+                >
+                  Download
+                </button>
+                <span id="gtfsMsg" class="muted"></span>
+              </div>
             </div>
+
+            <script>
+              const btn = document.getElementById("gtfsBtn");
+              const pw = document.getElementById("gtfsPw");
+              const msg = document.getElementById("gtfsMsg");
+
+              btn.addEventListener("click", async () => {
+                msg.textContent = "Checking…";
+                const url = `/.netlify/functions/gtfs?pw=${encodeURIComponent(pw.value)}`;
+
+                try {
+                  const r = await fetch(url);
+                  if (!r.ok) {
+                    msg.textContent = r.status === 403 ? "Wrong password" : `Error ${r.status}`;
+                    return;
+                  }
+
+                  const blob = await r.blob();
+                  const a = document.createElement("a");
+                  a.href = URL.createObjectURL(blob);
+                  a.download = "italo_latest.zip";
+                  document.body.appendChild(a);
+                  a.click();
+                  a.remove();
+                  msg.textContent = "Downloading…";
+                } catch (e) {
+                  msg.textContent = "Network error";
+                }
+              });
+            </script>
 
             <div class="card">
               <h2>Route Coverage Reports</h2>
