@@ -361,17 +361,12 @@ jobs:
           </head>
           <body>
 
-            <h1>Italo GTFS Export</h1>
-
-            <input type="password" id="key" placeholder="Enter download key">
-            <button onclick="download()">Download GTFS</button>
-
-            <script>
-            function download() {
-              const key = document.getElementById("key").value;
-              window.location.href = "/.netlify/functions/download-gtfs?key=" + encodeURIComponent(key);
-            }
-            </script>
+            <div class="card">
+              <h2>Downloads</h2>
+              <ul>
+                <li><a href="/.netlify/functions/download-gtfs">Download GTFS (latest)</a></li>
+              </ul>
+            </div>
 
             <div class="card">
               <h2>Route Coverage Reports</h2>
