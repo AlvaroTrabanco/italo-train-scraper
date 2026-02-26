@@ -370,9 +370,13 @@ jobs:
             <div class="card">
               <h2>GTFS Downloads</h2>
               <ul>
+              <li>
+                <a href="/.netlify/functions/gtfs?key=YOUR_SECRET">italo_latest.zip (private)</a>
+              </li>
                 <li><a href="gtfs/italo_latest.zip">italo_latest.zip</a> (stable URL)</li>
                 <li><a href="gtfs/latest.json">latest.json</a> (metadata)</li>
               </ul>
+              
             </div>
 
             <div class="card">
