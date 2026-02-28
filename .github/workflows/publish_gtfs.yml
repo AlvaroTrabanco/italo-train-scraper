@@ -326,6 +326,7 @@ jobs:
             }
       - name: Create reports index
         run: |
+          mkdir -p public/reports
           cat > public/reports/index.html <<EOF
           <h1>Reports</h1>
           <ul>
