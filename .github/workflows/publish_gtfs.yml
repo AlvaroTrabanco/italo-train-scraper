@@ -2,6 +2,11 @@ name: Build & Publish Italo GTFS + Stop Report
 
 on:
   workflow_dispatch:
+    inputs:
+      force_run:
+        description: "Ignore 8-day window and run scrape/build"
+        required: false
+        default: "false"
   schedule:
     - cron: "12 */1 * * *"  # every 1 hours at :12 UTC
   push:
@@ -24,8 +29,6 @@ concurrency:
 jobs:
   build_publish:
     runs-on: ubuntu-latest
-    env:
-      SKIP_RUN: "0"
     steps:
       # Main branch checkout (code)
       - name: Checkout (main)
@@ -81,46 +84,10 @@ jobs:
             echo "No previous normalized_latest found"
           fi
 
-      - name: Check 8-day window (auto-stop)
-        run: |
-          mkdir -p public/state
-
-          NOW_EPOCH=$(date -u +%s)
-
-          if [ -f gh-pages/state/collection_started_epoch.txt ]; then
-            START_EPOCH=$(cat gh-pages/state/collection_started_epoch.txt | tr -d '\n\r')
-            echo "Collection started epoch: $START_EPOCH"
-          else
-            START_EPOCH=$NOW_EPOCH
-            echo "Collection started epoch (new): $START_EPOCH"
-          fi
-
-          # Persist the start epoch every run
-          echo "$START_EPOCH" > public/state/collection_started_epoch.txt
-
-          ELAPSED=$((NOW_EPOCH - START_EPOCH))
-          LIMIT=$((8 * 24 * 3600))
-
-          if [ "$ELAPSED" -ge "$LIMIT" ]; then
-            echo "8-day collection window reached. Skipping scrape/normalize/build."
-            STOPPED_UTC=$(date -u +%Y%m%dT%H%M%SZ)
-            echo "{ \"status\": \"stopped\", \"collection_started_epoch\": $START_EPOCH, \"stopped_utc\": \"$STOPPED_UTC\" }" > public/state/collection_status.json
-            echo "SKIP_RUN=1" >> $GITHUB_ENV
-          else
-            NOW_UTC=$(date -u +%Y%m%dT%H%M%SZ)
-            echo "{ \"status\": \"running\", \"collection_started_epoch\": $START_EPOCH, \"now_utc\": \"$NOW_UTC\", \"elapsed_seconds\": $ELAPSED, \"limit_seconds\": $LIMIT }" > public/state/collection_status.json
-            echo "SKIP_RUN=0" >> $GITHUB_ENV
-          fi
-
-      - name: If SKIP_RUN=1, prepare minimal public site
-        if: env.SKIP_RUN == '1'
-        run: |
-          mkdir -p public/reports public/state public/gtfs
-          echo "<h1>GTFS collection stopped (8-day window reached)</h1>" > public/index.html
 
 
       - name: Scrape (from trains.txt)
-        if: env.SKIP_RUN != '1'
+        
         run: |
           mkdir -p out
 
@@ -142,7 +109,7 @@ jobs:
           echo "Scrape run folder: out/$RUN_UTC"
 
       - name: Normalize + merge into cumulative normalized_latest
-        if: env.SKIP_RUN != '1'
+        
         run: |
           OUTDIR="out/$RUN_UTC"
           NORMDIR="normalized/$RUN_UTC"
@@ -157,7 +124,7 @@ jobs:
           echo "normalized_latest now has $(ls -1 normalized_latest | wc -l) files"
 
       - name: Build GTFS (stable + dated) from cumulative normalized_latest
-        if: env.SKIP_RUN != '1'
+        
         run: |
           WINDOW_HOURS="${{ steps.vars.outputs.WINDOW_HOURS }}"
           NORMDIR="normalized_latest"
@@ -201,7 +168,7 @@ jobs:
           fi
 
       - name: Prepare flat GTFS artifact (GTFS files at root)
-        if: env.SKIP_RUN != '1'
+        
         run: |
           SERVICE_DATE="${{ steps.vars.outputs.SERVICE_DATE }}"
           mkdir -p gtfs_flat
@@ -213,7 +180,7 @@ jobs:
           ls -la gtfs_flat
 
       - name: Upload GTFS artifact (flat, valid GTFS zip)
-        if: env.SKIP_RUN != '1'
+        
         uses: actions/upload-artifact@v4
         with:
           name: italo_gtfs_${{ steps.vars.outputs.SERVICE_DATE }}
@@ -221,7 +188,7 @@ jobs:
           retention-days: 30
 
       - name: Expected routes vs GTFS (missing routes report)
-        if: env.SKIP_RUN != '1'
+        
         env:
           SERVICE_DATE: ${{ steps.vars.outputs.SERVICE_DATE }}
         run: |
@@ -234,7 +201,7 @@ jobs:
             --out-prefix "missing_routes"
 
       - name: Stop coordinates report (cumulative)
-        if: env.SKIP_RUN != '1'
+        
         run: |
           INV_IN="tmp_prev/stop_inventory.json"
           python scraper/report_stops.py \
@@ -247,7 +214,7 @@ jobs:
             --window-hours "${{ steps.vars.outputs.WINDOW_HOURS }}"
 
       - name: Alert if missing coordinates (create/update issue)
-        if: env.SKIP_RUN != '1'
+        
         uses: actions/github-script@v7
         with:
           script: |
@@ -431,7 +398,7 @@ jobs:
         run: npm install -g netlify-cli
 
       - name: Debug list public output
-        if: env.SKIP_RUN != '1'
+        
         run: |
           echo "=== public ==="
           ls -la public || true
