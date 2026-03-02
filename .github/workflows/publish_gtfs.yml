@@ -118,8 +118,11 @@ jobs:
 
           python scraper/normalize_italo.py --input-dir "$OUTDIR" --output-dir "$NORMDIR"
 
-          # Merge this run into cumulative normalized_latest (overwrite per train)
-          cp -f "$NORMDIR"/*.normalized.json normalized_latest/ 2>/dev/null || true
+          # Merge without deleting historical ones
+          for f in "$NORMDIR"/*.normalized.json; do
+            base=$(basename "$f")
+            cp -f "$f" "normalized_latest/$base"
+          done
 
           echo "normalized_latest now has $(ls -1 normalized_latest | wc -l) files"
 
