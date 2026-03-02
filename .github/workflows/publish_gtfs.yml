@@ -112,6 +112,13 @@ jobs:
             echo "SKIP_RUN=0" >> $GITHUB_ENV
           fi
 
+      - name: If SKIP_RUN=1, prepare minimal public site
+        if: env.SKIP_RUN == '1'
+        run: |
+          mkdir -p public/reports public/state public/gtfs
+          echo "<h1>GTFS collection stopped (8-day window reached)</h1>" > public/index.html
+
+
       - name: Scrape (from trains.txt)
         if: env.SKIP_RUN != '1'
         run: |
@@ -325,7 +332,6 @@ jobs:
               console.log(`Created issue #${created.data.number}`);
             }
       - name: Create reports index
-        if: env.SKIP_RUN != '1'
         run: |
           mkdir -p public/reports
           cat > public/reports/index.html <<EOF
@@ -339,7 +345,6 @@ jobs:
           EOF
 
       - name: Create site index (root)
-        if: env.SKIP_RUN != '1'
         run: |
           mkdir -p public
           cat > public/index.html <<'EOF'
@@ -434,9 +439,8 @@ jobs:
           ls -la public/reports || true
 
       - name: Deploy to Netlify (production)
-        if: env.SKIP_RUN != '1'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
-          netlify deploy --dir=public --prod --message "Italo GTFS: $RUN_UTC / $SERVICE_DATE"
+          netlify deploy --dir=public --prod --message "Italo GTFS: ${RUN_UTC:-stopped} / $SERVICE_DATE"
