@@ -325,6 +325,7 @@ jobs:
               console.log(`Created issue #${created.data.number}`);
             }
       - name: Create reports index
+        if: env.SKIP_RUN != '1'
         run: |
           mkdir -p public/reports
           cat > public/reports/index.html <<EOF
@@ -338,6 +339,7 @@ jobs:
           EOF
 
       - name: Create site index (root)
+        if: env.SKIP_RUN != '1'
         run: |
           mkdir -p public
           cat > public/index.html <<'EOF'
@@ -424,6 +426,7 @@ jobs:
         run: npm install -g netlify-cli
 
       - name: Deploy to Netlify (production)
+        if: env.SKIP_RUN != '1'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
