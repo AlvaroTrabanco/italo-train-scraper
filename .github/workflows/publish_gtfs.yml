@@ -425,6 +425,14 @@ jobs:
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
+      - name: Debug list public output
+        if: env.SKIP_RUN != '1'
+        run: |
+          echo "=== public ==="
+          ls -la public || true
+          echo "=== public/reports ==="
+          ls -la public/reports || true
+
       - name: Deploy to Netlify (production)
         if: env.SKIP_RUN != '1'
         env:
