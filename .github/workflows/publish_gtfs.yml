@@ -109,7 +109,6 @@ jobs:
           echo "Scrape run folder: out/$RUN_UTC"
 
       - name: Normalize + merge into cumulative normalized_latest
-        
         run: |
           OUTDIR="out/$RUN_UTC"
           NORMDIR="normalized/$RUN_UTC"
@@ -118,13 +117,63 @@ jobs:
 
           python scraper/normalize_italo.py --input-dir "$OUTDIR" --output-dir "$NORMDIR"
 
-          # Merge without deleting historical ones
-          for f in "$NORMDIR"/*.normalized.json; do
-            base=$(basename "$f")
-            cp -f "$f" "normalized_latest/$base"
-          done
+          python3 - <<'PY'
+          import json
+          import os
+          import shutil
+          from glob import glob
 
-          echo "normalized_latest now has $(ls -1 normalized_latest | wc -l) files"
+          normdir = os.path.join("normalized", os.environ["RUN_UTC"])
+          latestdir = "normalized_latest"
+
+          def load_json(path):
+              with open(path, "r", encoding="utf-8") as f:
+                  return json.load(f)
+
+          def score(data):
+              train = (data.get("train_number") or "").strip()
+              origin = (data.get("origin_station") or "").strip()
+              dest = (data.get("destination_station") or "").strip()
+              stops = data.get("stops", []) or []
+
+              s = 0
+              if train:
+                  s += 10
+              if origin:
+                  s += 20
+              if dest:
+                  s += 20
+              s += min(len(stops), 200)
+              return s
+
+          for new_path in glob(os.path.join(normdir, "*.normalized.json")):
+              base = os.path.basename(new_path)
+              old_path = os.path.join(latestdir, base)
+
+              if not os.path.exists(old_path):
+                  shutil.copy2(new_path, old_path)
+                  print(f"ADD    {base}")
+                  continue
+
+              try:
+                  new_data = load_json(new_path)
+                  old_data = load_json(old_path)
+              except Exception:
+                  print(f"KEEP   {base} (parse issue)")
+                  continue
+
+              new_score = score(new_data)
+              old_score = score(old_data)
+
+              if new_score >= old_score:
+                  shutil.copy2(new_path, old_path)
+                  print(f"UPDATE {base} old={old_score} new={new_score}")
+              else:
+                  print(f"KEEP   {base} old={old_score} new={new_score}")
+
+          count = len(glob(os.path.join(latestdir, "*.normalized.json")))
+          print(f"normalized_latest now has {count} files")
+          PY
 
       - name: Build GTFS (stable + dated) from cumulative normalized_latest
         
