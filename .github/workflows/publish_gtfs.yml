@@ -147,6 +147,9 @@ jobs:
 
           # Persist cumulative normalized_latest to Pages state
           cp -f normalized_latest/*.normalized.json public/state/normalized_latest/ 2>/dev/null || true
+          
+          # Create manifest of normalized files for local rebuilds
+          find public/state/normalized_latest -type f -name '*.normalized.json' -printf '%f\n' | sort > public/state/normalized_latest_manifest.txt
 
           NORM_COUNT=$(ls -1 normalized_latest | wc -l)
           TRIPS_COUNT=$(python3 -c 'import os,zipfile; sd=os.environ["SERVICE_DATE"]; zp=f"gtfs/italo_{sd}.zip"; z=zipfile.ZipFile(zp); lines=z.read("trips.txt").decode("utf-8","replace").splitlines(); print(max(0,len(lines)-1))')
