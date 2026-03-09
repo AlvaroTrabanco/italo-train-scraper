@@ -1,7 +1,7 @@
 {
   "train_number": "9920",
-  "last_update": "16:10",
-  "captured_utc": "20260224T151622Z",
+  "last_update": "10:37",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Salerno",
   "destination_station": "Torino Porta Nuova",
   "origin_code": "SAL",
@@ -21,15 +21,15 @@
       "location_code": "NAC",
       "rfi_location_code": "1888",
       "arrival_time": "07:58:00",
-      "departure_time": "08:20:00"
+      "departure_time": "08:15:00"
     },
     {
       "stop_sequence": 2,
       "stop_name": "Napoli Afragola",
       "location_code": "NAF",
       "rfi_location_code": "4020",
-      "arrival_time": "08:33:00",
-      "departure_time": "08:35:00"
+      "arrival_time": "08:28:00",
+      "departure_time": "08:30:00"
     },
     {
       "stop_sequence": 3,
@@ -100,7 +100,7 @@
       "stop_name": "Torino Porta Nuova",
       "location_code": "TOP",
       "rfi_location_code": "2876",
-      "arrival_time": "14:36:00",
+      "arrival_time": "14:30:00",
       "departure_time": null
     }
   ]

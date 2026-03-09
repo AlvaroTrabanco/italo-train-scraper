@@ -1,7 +1,7 @@
 {
   "train_number": "8956",
-  "last_update": "09:51",
-  "captured_utc": "20260225T085646Z",
+  "last_update": "10:36",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Napoli",
   "destination_station": "Brescia",
   "origin_code": "NAC",
@@ -13,7 +13,7 @@
       "location_code": "NAC",
       "rfi_location_code": "1888",
       "arrival_time": null,
-      "departure_time": "07:02:00"
+      "departure_time": "06:57:00"
     },
     {
       "stop_sequence": 1,

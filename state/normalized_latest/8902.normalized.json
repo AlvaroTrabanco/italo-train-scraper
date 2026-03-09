@@ -1,7 +1,7 @@
 {
   "train_number": "8902",
-  "last_update": "09:50",
-  "captured_utc": "20260225T085646Z",
+  "last_update": "10:35",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Trieste C.le",
   "destination_station": "Napoli",
   "origin_code": "TSC",
@@ -116,7 +116,7 @@
       "stop_name": "Napoli",
       "location_code": "NAC",
       "rfi_location_code": "1888",
-      "arrival_time": "15:33:00",
+      "arrival_time": "15:28:00",
       "departure_time": null
     }
   ]

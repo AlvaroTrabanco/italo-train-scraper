@@ -1,7 +1,7 @@
 {
   "train_number": "8903",
-  "last_update": "10:07",
-  "captured_utc": "20260224T091015Z",
+  "last_update": "10:35",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Venezia Santa Lucia",
   "destination_station": "Napoli",
   "origin_code": "VSL",
@@ -76,7 +76,7 @@
       "stop_name": "Napoli",
       "location_code": "NAC",
       "rfi_location_code": "1888",
-      "arrival_time": "12:33:00",
+      "arrival_time": "12:28:00",
       "departure_time": null
     }
   ]

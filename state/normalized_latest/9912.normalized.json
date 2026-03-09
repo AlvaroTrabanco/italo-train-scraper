@@ -1,7 +1,7 @@
 {
   "train_number": "9912",
-  "last_update": "10:07",
-  "captured_utc": "20260224T091015Z",
+  "last_update": "10:37",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Napoli",
   "destination_station": "Torino Porta Nuova",
   "origin_code": "NAC",
@@ -13,15 +13,15 @@
       "location_code": "NAC",
       "rfi_location_code": "1888",
       "arrival_time": null,
-      "departure_time": "06:14:00"
+      "departure_time": "06:09:00"
     },
     {
       "stop_sequence": 1,
       "stop_name": "Napoli Afragola",
       "location_code": "NAF",
       "rfi_location_code": "4020",
-      "arrival_time": "06:26:00",
-      "departure_time": "06:28:00"
+      "arrival_time": "06:21:00",
+      "departure_time": "06:23:00"
     },
     {
       "stop_sequence": 2,
@@ -92,7 +92,7 @@
       "stop_name": "Torino Porta Nuova",
       "location_code": "TOP",
       "rfi_location_code": "2876",
-      "arrival_time": "12:46:00",
+      "arrival_time": "12:40:00",
       "departure_time": null
     }
   ]

@@ -1,7 +1,7 @@
 {
   "train_number": "8907",
-  "last_update": "14:51",
-  "captured_utc": "20260221T135517Z",
+  "last_update": "10:36",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Udine",
   "destination_station": "Napoli",
   "origin_code": "UDN",
@@ -100,7 +100,7 @@
       "stop_name": "Napoli",
       "location_code": "NAC",
       "rfi_location_code": "1888",
-      "arrival_time": "14:48:00",
+      "arrival_time": "14:43:00",
       "departure_time": null
     }
   ]

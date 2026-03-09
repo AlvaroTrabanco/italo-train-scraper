@@ -1,7 +1,7 @@
 {
   "train_number": "9970",
-  "last_update": "09:54",
-  "captured_utc": "20260225T085646Z",
+  "last_update": "10:39",
+  "captured_utc": "20260309T094121Z",
   "origin_station": "Napoli",
   "destination_station": "Milano Centrale",
   "origin_code": "NAC",
@@ -13,15 +13,15 @@
       "location_code": "NAC",
       "rfi_location_code": "1888",
       "arrival_time": null,
-      "departure_time": "06:02:00"
+      "departure_time": "05:57:00"
     },
     {
       "stop_sequence": 1,
       "stop_name": "Napoli Afragola",
       "location_code": "NAF",
       "rfi_location_code": "4020",
-      "arrival_time": "06:14:00",
-      "departure_time": "06:16:00"
+      "arrival_time": "06:09:00",
+      "departure_time": "06:11:00"
     },
     {
       "stop_sequence": 2,
