@@ -210,11 +210,3 @@ The workflow automatically stops scraping after 8 days.
 Status is visible at:
 
 /state/collection_status.json
-
-
-⸻
-
-If you’d like, I can also generate:
-	•	A diagram of the architecture
-	•	A short “developer notes” section
-	•	Or a trimmed README version suitable for public visibility
